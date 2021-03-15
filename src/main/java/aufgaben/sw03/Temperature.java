@@ -3,7 +3,7 @@ package aufgaben.sw03;
 class Temperature {
     private float celsius;
 
-    public String getAggregationState(String elementSymbol) {
+    public String getAggregationState(final String elementSymbol) {
         switch (elementSymbol) {
             case "N":
                 return calcAggregationState(-210.1f, -196);
@@ -16,17 +16,17 @@ class Temperature {
         }
     }
 
-    private String calcAggregationState(float meltingPoint, int boilingPoint) {
+    private String calcAggregationState(final float meltingPoint, final int boilingPoint) {
         if (celsius >= boilingPoint) {
             return "gaseous";
         } else if (celsius >= meltingPoint) {
             return "liquid";
-        } else {
-            return "solid";
         }
+        return "solid";
     }
 
     // SW02
+
     /**
      * default 20 degree celsius
      */
