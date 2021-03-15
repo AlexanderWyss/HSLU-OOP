@@ -1,0 +1,5 @@
+/.idea/
+/bluej/*
+!/bluej/.gitkeep
+/build/
+/.gradle/
