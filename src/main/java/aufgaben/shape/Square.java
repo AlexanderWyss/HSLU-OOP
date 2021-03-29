@@ -1,28 +1,28 @@
 package aufgaben.shape;
 
 public class Square extends Shape {
-    private int width;
+    private int length;
 
-    protected Square(final int x, final int y, final int width) {
+    protected Square(final int x, final int y, final int length) {
         super(x, y);
-        this.width = width;
+        this.length = length;
     }
 
-    public int getWidth() {
-        return width;
+    public int getLength() {
+        return length;
     }
 
-    public void setWidth(final int width) {
-        this.width = width;
+    public void setLength(final int length) {
+        this.length = length;
     }
 
     @Override
     public int getPerimeter() {
-        return width * 4;
+        return length * 4;
     }
 
     @Override
     public int getArea() {
-        return width * width;
+        return length * length;
     }
 }
