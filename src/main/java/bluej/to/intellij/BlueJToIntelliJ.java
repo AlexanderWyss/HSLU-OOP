@@ -37,7 +37,7 @@ public class BlueJToIntelliJ {
     public void convert(Path blueJProjectPath) throws IOException {
         File dir = blueJProjectPath.toFile();
         assertDir(dir);
-        convertDir(dir, toValidPackageName(dir.getName()));
+        convertDir(dir, "book." + toValidPackageName(dir.getName()));
     }
 
     private void convertDir(File dir, String packageName) throws IOException {
