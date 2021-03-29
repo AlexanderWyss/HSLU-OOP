@@ -1,8 +1,9 @@
 package aufgaben.switchable;
 
-public class CountingSwitchable implements Switchable {
+public class CountingSwitchable implements Switchable, Named {
     private boolean value = false;
     private int count = 0;
+    private String name = getClass().getName();
 
 
     @Override
@@ -29,5 +30,15 @@ public class CountingSwitchable implements Switchable {
 
     public int getCount() {
         return count;
+    }
+
+    @Override
+    public String getName() {
+        return name;
+    }
+
+    @Override
+    public void setName(String name) {
+        this.name = name;
     }
 }
