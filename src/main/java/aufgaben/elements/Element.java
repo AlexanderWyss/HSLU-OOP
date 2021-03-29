@@ -1,32 +1,37 @@
 package aufgaben.elements;
 
+import static aufgaben.elements.Temperature.celsius;
+
 public abstract class Element {
     private final String symbol;
-    private final double meltingPoint;
-    private final double boilingPoint;
+    private final Temperature meltingPoint;
+    private final Temperature boilingPoint;
 
-    protected Element(final String symbol, final double meltingPointCelsius, final double boilingPointCelsius) {
+    protected Element(final String symbol, final Temperature meltingPoint, final Temperature boilingPoint) {
         this.symbol = symbol;
-        this.meltingPoint = meltingPointCelsius;
-        this.boilingPoint = boilingPointCelsius;
+        this.meltingPoint = meltingPoint;
+        this.boilingPoint = boilingPoint;
+    }
+    protected Element(final String symbol, final double meltingPointCelsius, final double boilingPointCelsius) {
+        this(symbol, celsius(meltingPointCelsius), celsius(boilingPointCelsius));
     }
 
     public String getSymbol() {
         return symbol;
     }
 
-    public double getMeltingPoint() {
+    public Temperature getMeltingPoint() {
         return meltingPoint;
     }
 
-    public double getBoilingPoint() {
+    public Temperature getBoilingPoint() {
         return boilingPoint;
     }
 
     public String getAggregationState(Temperature temperature) {
-        if (temperature.getCelsius() >= boilingPoint) {
+        if (temperature.getCelsius() >= boilingPoint.getCelsius()) {
             return "gaseous";
-        } else if (temperature.getCelsius() >= meltingPoint) {
+        } else if (temperature.getCelsius() >= meltingPoint.getCelsius()) {
             return "liquid";
         }
         return "solid";

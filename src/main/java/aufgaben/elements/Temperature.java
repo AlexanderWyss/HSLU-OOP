@@ -1,9 +1,7 @@
 package aufgaben.elements;
 
 class Temperature {
-    private float celsius;
-
-    // SW02
+    private double celsius;
 
     /**
      * default 20 degree celsius
@@ -12,71 +10,71 @@ class Temperature {
         this(20);
     }
 
-    private Temperature(final float celsius) {
+    private Temperature(final double celsius) {
         this.celsius = celsius;
     }
 
-    public float getCelsius() {
+    public double getCelsius() {
         return this.celsius;
     }
 
-    public void setCelsius(final float celsius) {
+    public void setCelsius(final double celsius) {
         this.celsius = celsius;
     }
 
-    public void addCelsius(final float celsius) {
+    public void addCelsius(final double celsius) {
         this.celsius += celsius;
     }
 
-    public static Temperature celsius(final float celsius) {
+    public static Temperature celsius(final double celsius) {
         return new Temperature(celsius);
     }
 
-    public float getKelvin() {
+    public double getKelvin() {
         return toKelvin(this.celsius);
     }
 
-    private static float toKelvin(final float celsius) {
-        return celsius + 273.15f;
+    private static double toKelvin(final double celsius) {
+        return celsius + 273.15;
     }
 
-    public void setKelvin(final float kelvin) {
+    public void setKelvin(final double kelvin) {
         this.celsius = fromKelvin(kelvin);
     }
 
-    private static float fromKelvin(final float kelvin) {
-        return kelvin - 273.15f;
+    private static double fromKelvin(final double kelvin) {
+        return kelvin - 273.15;
     }
 
-    public void addKelvin(final float kelvin) {
+    public void addKelvin(final double kelvin) {
         setKelvin(kelvin + getKelvin());
     }
 
-    public static Temperature kelvin(final float kelvin) {
+    public static Temperature kelvin(final double kelvin) {
         return new Temperature(fromKelvin(kelvin));
     }
 
-    public float getFahrenheit() {
+    public double getFahrenheit() {
         return toFahrenheit(this.celsius);
     }
 
-    private static float toFahrenheit(final float celsius) {
-        return (celsius * (9f / 5f)) + 32f;
+    private static double toFahrenheit(final double celsius) {
+        return (celsius * (9. / 5.)) + 32;
     }
 
-    public void setFahrenheit(final float fahrenheit) {
+    public void setFahrenheit(final double fahrenheit) {
         this.celsius = fromFahrenheit(fahrenheit);
     }
 
-    private static float fromFahrenheit(final float fahrenheit) {
-        return (fahrenheit - 32f) * (5f / 9f);
+    private static double fromFahrenheit(final double fahrenheit) {
+        return (fahrenheit - 32) * (5. / 9.);
     }
 
-    public void addFahrenheit(final float fahrenheit) {
+    public void addFahrenheit(final double fahrenheit) {
         setFahrenheit(fahrenheit + getFahrenheit());
     }
 
-    public static Temperature fahrenheit(final float fahrenheit) {
+    public static Temperature fahrenheit(final double fahrenheit) {
         return new Temperature(fromFahrenheit(fahrenheit));
     }
 }
