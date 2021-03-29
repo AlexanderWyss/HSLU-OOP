@@ -31,4 +31,13 @@ public abstract class Element {
         }
         return "solid";
     }
+
+    @Override
+    public String toString() {
+        return getClass().getName() + "{" +
+                "symbol='" + symbol + '\'' +
+                ", meltingPoint=" + meltingPoint +
+                ", boilingPoint=" + boilingPoint +
+                '}';
+    }
 }
