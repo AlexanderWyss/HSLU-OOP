@@ -1,27 +1,26 @@
 package aufgaben.shape;
 
-class Line {
-    private Point a;
-    private Point b;
+import static java.lang.Math.*;
 
-    public Line(final Point a, final Point b) {
-        this.a = a;
-        this.b = b;
+class Line extends Shape {
+    private final Point endPosition;
+
+    public Line(final Point position, final Point endPosition) {
+        super(position);
+        this.endPosition = endPosition;
     }
 
-    public Point getA() {
-        return a;
+    public Point getEndPosition() {
+        return endPosition;
     }
 
-    public void setA(final Point a) {
-        this.a = a;
+    @Override
+    public int getPerimeter() {
+        return (int) round(sqrt(pow(getPosition().getX() - endPosition.getX(), 2) + pow(getPosition().getY() - endPosition.getY(), 2)));
     }
 
-    public Point getB() {
-        return b;
-    }
-
-    public void setB(final Point b) {
-        this.b = b;
+    @Override
+    public int getArea() {
+        return 0;
     }
 }
