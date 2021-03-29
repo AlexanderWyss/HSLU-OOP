@@ -1,4 +1,4 @@
-package aufgaben;
+package aufgaben.switchable;
 
 class Motor implements Switchable {
 

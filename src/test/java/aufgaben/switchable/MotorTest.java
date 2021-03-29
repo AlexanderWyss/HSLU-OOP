@@ -1,4 +1,4 @@
-package aufgaben;
+package aufgaben.switchable;
 
 import org.junit.jupiter.api.Test;
 

@@ -1,4 +1,4 @@
-package aufgaben;
+package aufgaben.switchable;
 
 public class CountingSwitchable implements Switchable {
     private boolean value = false;
