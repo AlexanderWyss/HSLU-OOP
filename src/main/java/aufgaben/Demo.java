@@ -1,4 +1,4 @@
-package aufgaben.sw03;
+package aufgaben;
 
 import java.io.PrintStream;
 

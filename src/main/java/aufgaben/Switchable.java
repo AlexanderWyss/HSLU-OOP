@@ -1,4 +1,4 @@
-package aufgaben.sw04;
+package aufgaben;
 
 /**
  * Implements a two way switch.

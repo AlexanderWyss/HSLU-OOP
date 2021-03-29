@@ -1,4 +1,4 @@
-package aufgaben.sw04;
+package aufgaben;
 
 class Line {
     private Point a;

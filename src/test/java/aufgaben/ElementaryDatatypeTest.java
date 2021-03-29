@@ -1,4 +1,4 @@
-package aufgaben.sw02;
+package aufgaben;
 
 import org.junit.jupiter.api.Test;
 

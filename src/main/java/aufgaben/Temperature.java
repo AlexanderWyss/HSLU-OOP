@@ -1,4 +1,4 @@
-package aufgaben.sw03;
+package aufgaben;
 
 class Temperature {
     private float celsius;
