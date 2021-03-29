@@ -1,4 +1,4 @@
-package aufgaben;
+package aufgaben.shape;
 
 import static java.lang.Math.*;
 

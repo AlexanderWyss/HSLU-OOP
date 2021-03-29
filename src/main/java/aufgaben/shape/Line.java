@@ -1,4 +1,4 @@
-package aufgaben;
+package aufgaben.shape;
 
 class Line {
     private Point a;
