@@ -1,29 +1,7 @@
-package aufgaben;
+package aufgaben.elements;
 
 class Temperature {
     private float celsius;
-
-    public String getAggregationState(final String elementSymbol) {
-        switch (elementSymbol) {
-            case "N":
-                return calcAggregationState(-210.1f, -196);
-            case "Hg":
-                return calcAggregationState(-38.83f, 357);
-            case "Pb":
-                return calcAggregationState(327.43f, 1744);
-            default:
-                throw new IllegalArgumentException("Element not known");
-        }
-    }
-
-    private String calcAggregationState(final float meltingPoint, final int boilingPoint) {
-        if (celsius >= boilingPoint) {
-            return "gaseous";
-        } else if (celsius >= meltingPoint) {
-            return "liquid";
-        }
-        return "solid";
-    }
 
     // SW02
 

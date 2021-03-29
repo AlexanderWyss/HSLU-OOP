@@ -1,41 +1,11 @@
-package aufgaben;
+package aufgaben.elements;
 
 import org.junit.jupiter.api.Test;
 
-import static aufgaben.Temperature.*;
+import static aufgaben.elements.Temperature.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class TemperatureTest {
-    @Test
-    void d_aggregationState_N() {
-        assertEquals("solid", kelvin(0).getAggregationState("N"));
-        assertEquals("solid", celsius(-210.2f).getAggregationState("N"));
-        assertEquals("liquid", celsius(-210.1f).getAggregationState("N"));
-        assertEquals("liquid", celsius(-196.1f).getAggregationState("N"));
-        assertEquals("gaseous", celsius(-196).getAggregationState("N"));
-        assertEquals("gaseous", celsius(15).getAggregationState("N"));
-    }
-
-    @Test
-    void d_aggregationState_Hg() {
-        assertEquals("solid", kelvin(0).getAggregationState("Hg"));
-        assertEquals("solid", celsius(-38.84f).getAggregationState("Hg"));
-        assertEquals("liquid", celsius(-38.83f).getAggregationState("Hg"));
-        assertEquals("liquid", celsius(356.9f).getAggregationState("Hg"));
-        assertEquals("gaseous", celsius(357).getAggregationState("Hg"));
-        assertEquals("gaseous", celsius(500).getAggregationState("Hg"));
-    }
-
-    @Test
-    void d_aggregationState_Pb() {
-        assertEquals("solid", kelvin(0).getAggregationState("Pb"));
-        assertEquals("solid", celsius(327.42f).getAggregationState("Pb"));
-        assertEquals("liquid", celsius(327.43f).getAggregationState("Pb"));
-        assertEquals("liquid", celsius(1743.9f).getAggregationState("Pb"));
-        assertEquals("gaseous", celsius(1744).getAggregationState("Pb"));
-        assertEquals("gaseous", celsius(2000).getAggregationState("Pb"));
-    }
-
     // SW02
     @Test
     void newCelsius_correctlySetAndConverted() {
