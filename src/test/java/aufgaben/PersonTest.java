@@ -38,7 +38,9 @@ class PersonTest {
         boolean result = personA.equals(personB);
 
         assertFalse(result);
-    }    @Test
+    }
+
+    @Test
     void twoEqualPersons_hashCode_hashCodeAreEqual() {
         Person personA = new Person(1, "Riva", "Geralt");
         Person personB = new Person(1, "Riva", "Geralt");
