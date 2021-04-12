@@ -79,4 +79,11 @@ class PersonTest {
 
         assertEquals(-1, personA.compareTo(personB));
     }
+
+    @Test
+    void person_getFullName_correctName() {
+        Person person = new Person(0, "Schneider", "Ferdinand");
+
+        assertEquals("Schneider Ferdinand", person.getFullName());
+    }
 }

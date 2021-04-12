@@ -25,6 +25,10 @@ public class Person implements Comparable<Person> {
         return firstname;
     }
 
+    public String getFullName() {
+        return name + " " + firstname;
+    }
+
     @Override
     public String toString() {
         return "Person{" +
