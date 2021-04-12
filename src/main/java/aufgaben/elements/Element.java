@@ -48,8 +48,9 @@ public abstract class Element implements Comparable<Element> {
 
     @Override
     public String toString() {
-        return getClass().getName() + "{" +
-                "symbol='" + symbol + '\'' +
+        return "Element{" +
+                "atomicNumber=" + atomicNumber +
+                ", symbol='" + symbol + '\'' +
                 ", meltingPoint=" + meltingPoint +
                 ", boilingPoint=" + boilingPoint +
                 '}';
