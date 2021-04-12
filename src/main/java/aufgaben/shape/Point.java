@@ -31,6 +31,11 @@ class Point {
         moveRelative(point.getX(), point.getY());
     }
 
+    /**
+     * Moves the point relative by the value in direction of the angle
+     * @param angle in degrees
+     * @param value line length
+     */
     public void moveRelativeAngle(final double angle, final double value) {
         final double radians = toRadians(angle);
         moveRelative((int) round(cos(radians) * value), (int) round(sin(radians) * value));
