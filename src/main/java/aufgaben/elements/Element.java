@@ -1,5 +1,7 @@
 package aufgaben.elements;
 
+import java.util.Objects;
+
 import static aufgaben.elements.Temperature.celsius;
 
 public abstract class Element {
@@ -12,6 +14,7 @@ public abstract class Element {
         this.meltingPoint = meltingPoint;
         this.boilingPoint = boilingPoint;
     }
+
     protected Element(final String symbol, final double meltingPointCelsius, final double boilingPointCelsius) {
         this(symbol, celsius(meltingPointCelsius), celsius(boilingPointCelsius));
     }
@@ -44,5 +47,22 @@ public abstract class Element {
                 ", meltingPoint=" + meltingPoint +
                 ", boilingPoint=" + boilingPoint +
                 '}';
+    }
+
+    @Override
+    public final boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Element)) return false;
+
+        Element element = (Element) o;
+
+        return Objects.equals(element.symbol, symbol)
+                && Objects.equals(element.meltingPoint, meltingPoint)
+                && Objects.equals(element.boilingPoint, boilingPoint);
+    }
+
+    @Override
+    public final int hashCode() {
+        return Objects.hash(symbol, meltingPoint, boilingPoint);
     }
 }

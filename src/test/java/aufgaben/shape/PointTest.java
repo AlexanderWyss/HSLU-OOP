@@ -1,10 +1,15 @@
 package aufgaben.shape;
 
+import nl.jqno.equalsverifier.EqualsVerifier;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class PointTest {
+    @Test
+    void verifyEquals() {
+        EqualsVerifier.simple().forClass(Point.class).verify();
+    }
 
     // sw06
     @Test

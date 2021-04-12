@@ -1,5 +1,7 @@
 package aufgaben.shape;
 
+import java.util.Objects;
+
 import static java.lang.Math.*;
 
 class Point {
@@ -55,5 +57,20 @@ class Point {
             return 4;
         }
         return 0;
+    }
+
+    @Override
+    public final boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Point)) return false;
+
+        Point point = (Point) o;
+
+        return Objects.equals(point.x, x) && Objects.equals(point.y, y);
+    }
+
+    @Override
+    public final int hashCode() {
+        return Objects.hash(x, y);
     }
 }

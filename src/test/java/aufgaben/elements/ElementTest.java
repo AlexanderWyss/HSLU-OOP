@@ -1,11 +1,18 @@
 package aufgaben.elements;
 
+import nl.jqno.equalsverifier.EqualsVerifier;
 import org.junit.jupiter.api.Test;
 
-import static aufgaben.elements.Temperature.*;
+import static aufgaben.elements.Temperature.celsius;
+import static aufgaben.elements.Temperature.kelvin;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class ElementTest {
+    @Test
+    void verifyEquals() {
+        EqualsVerifier.forClass(Element.class).verify();
+    }
+
     @Test
     void d_aggregationState_N() {
         assertEquals("solid", new Nitrogen().getAggregationState(kelvin(0)));

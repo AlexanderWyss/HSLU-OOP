@@ -1,5 +1,7 @@
 package aufgaben.elements;
 
+import java.util.Objects;
+
 class Temperature {
     private double celsius;
 
@@ -76,5 +78,24 @@ class Temperature {
 
     public static Temperature fahrenheit(final double fahrenheit) {
         return new Temperature(fromFahrenheit(fahrenheit));
+    }
+
+    @Override
+    public final boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof Temperature)) {
+            return false;
+        }
+
+        Temperature temperature = (Temperature) o;
+
+        return Objects.equals(temperature.celsius, celsius);
+    }
+
+    @Override
+    public final int hashCode() {
+        return Objects.hash(celsius);
     }
 }

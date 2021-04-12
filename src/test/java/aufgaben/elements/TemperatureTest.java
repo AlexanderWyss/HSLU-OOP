@@ -1,11 +1,18 @@
 package aufgaben.elements;
 
+import nl.jqno.equalsverifier.EqualsVerifier;
 import org.junit.jupiter.api.Test;
 
 import static aufgaben.elements.Temperature.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class TemperatureTest {
+
+    @Test
+    void verifyEquals() {
+        EqualsVerifier.simple().forClass(Temperature.class).verify();
+    }
+
     // SW02
     @Test
     void newCelsius_correctlySetAndConverted() {
