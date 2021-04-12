@@ -2,7 +2,7 @@ package aufgaben.elements;
 
 import java.util.Objects;
 
-class Temperature {
+class Temperature implements Comparable<Temperature> {
     private double celsius;
 
     /**
@@ -97,5 +97,10 @@ class Temperature {
     @Override
     public final int hashCode() {
         return Objects.hash(celsius);
+    }
+
+    @Override
+    public int compareTo(Temperature temp) {
+        return Double.compare(celsius, temp.celsius);
     }
 }

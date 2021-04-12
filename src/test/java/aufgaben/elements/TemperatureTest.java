@@ -1,5 +1,6 @@
 package aufgaben.elements;
 
+import aufgaben.Person;
 import nl.jqno.equalsverifier.EqualsVerifier;
 import org.junit.jupiter.api.Test;
 
@@ -7,6 +8,45 @@ import static aufgaben.elements.Temperature.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class TemperatureTest {
+    @Test
+    void twoEqualTemp_compareTo_return0() {
+        Temperature tempA = celsius(5);
+        Temperature tempB = celsius(5);
+
+        assertEquals(0, tempA.compareTo(tempB));
+    }
+
+    @Test
+    void tempAGreater_compareTo_returnPlusOne() {
+        Temperature tempA = celsius(26);
+        Temperature tempB = celsius(23);
+
+        assertEquals(1, tempA.compareTo(tempB));
+    }
+
+    @Test
+    void tempBGreater_compareTo_returnPlusOne() {
+        Temperature tempA = celsius(-22);
+        Temperature tempB = celsius(-15);
+
+        assertEquals(-1, tempA.compareTo(tempB));
+    }
+
+    @Test
+    void personAWithGreaterId_compareTo_returnPlusOne() {
+        Person personA = new Person(3, "Riva", "Geralt");
+        Person personB = new Person(1, "Riva", "Geralt");
+
+        assertEquals(1, personA.compareTo(personB));
+    }
+
+    @Test
+    void personBWithGreaterId_compareTo_returnMinusOne() {
+        Person personA = new Person(-2, "Riva", "Geralt");
+        Person personB = new Person(1, "Riva", "Geralt");
+
+        assertEquals(-1, personA.compareTo(personB));
+    }
 
     @Test
     void verifyEquals() {
