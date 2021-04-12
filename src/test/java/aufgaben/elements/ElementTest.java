@@ -8,6 +8,31 @@ import static aufgaben.elements.Temperature.kelvin;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class ElementTest {
+
+    @Test
+    void elementWithSameAtomicNumber_compareTo_return0() {
+        Element elementA = new TestElement(3);
+        Element elementB = new TestElement(3);
+
+        assertEquals(0, elementA.compareTo(elementB));
+    }
+
+    @Test
+    void elementAWithGreaterAtomicNumber_compareTo_returnPlusOne() {
+        Element elementA = new TestElement(26);
+        Element elementB = new TestElement(3);
+
+        assertEquals(1, elementA.compareTo(elementB));
+    }
+
+    @Test
+    void elementBWithGreaterAtomicNumber_compareTo_returnMinusOne() {
+        Element elementA = new TestElement(3);
+        Element elementB = new TestElement(7);
+
+        assertEquals(-1, elementA.compareTo(elementB));
+    }
+
     @Test
     void verifyEquals() {
         EqualsVerifier.forClass(Element.class).verify();
@@ -41,5 +66,12 @@ class ElementTest {
         assertEquals("liquid", new Lead().getAggregationState(celsius(1743.9f)));
         assertEquals("gaseous", new Lead().getAggregationState(celsius(1744)));
         assertEquals("gaseous", new Lead().getAggregationState(celsius(2000)));
+    }
+
+
+    private static class TestElement extends Element {
+        private TestElement(int atomicNumber) {
+            super(atomicNumber, "", 0, 0);
+        }
     }
 }

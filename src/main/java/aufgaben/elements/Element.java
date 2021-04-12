@@ -4,19 +4,25 @@ import java.util.Objects;
 
 import static aufgaben.elements.Temperature.celsius;
 
-public abstract class Element {
+public abstract class Element implements Comparable<Element> {
+    private final int atomicNumber;
     private final String symbol;
     private final Temperature meltingPoint;
     private final Temperature boilingPoint;
 
-    protected Element(final String symbol, final Temperature meltingPoint, final Temperature boilingPoint) {
+    protected Element(final int atomicNumber, final String symbol, final Temperature meltingPoint, final Temperature boilingPoint) {
+        this.atomicNumber = atomicNumber;
         this.symbol = symbol;
         this.meltingPoint = meltingPoint;
         this.boilingPoint = boilingPoint;
     }
 
-    protected Element(final String symbol, final double meltingPointCelsius, final double boilingPointCelsius) {
-        this(symbol, celsius(meltingPointCelsius), celsius(boilingPointCelsius));
+    protected Element(final int atomicNumber, final String symbol, final double meltingPointCelsius, final double boilingPointCelsius) {
+        this(atomicNumber, symbol, celsius(meltingPointCelsius), celsius(boilingPointCelsius));
+    }
+
+    public int getAtomicNumber() {
+        return atomicNumber;
     }
 
     public String getSymbol() {
@@ -56,13 +62,19 @@ public abstract class Element {
 
         Element element = (Element) o;
 
-        return Objects.equals(element.symbol, symbol)
+        return Objects.equals(element.atomicNumber, atomicNumber)
+                && Objects.equals(element.symbol, symbol)
                 && Objects.equals(element.meltingPoint, meltingPoint)
                 && Objects.equals(element.boilingPoint, boilingPoint);
     }
 
     @Override
     public final int hashCode() {
-        return Objects.hash(symbol, meltingPoint, boilingPoint);
+        return Objects.hash(atomicNumber, symbol, meltingPoint, boilingPoint);
+    }
+
+    @Override
+    public int compareTo(Element element) {
+        return Double.compare(atomicNumber, element.atomicNumber);
     }
 }
