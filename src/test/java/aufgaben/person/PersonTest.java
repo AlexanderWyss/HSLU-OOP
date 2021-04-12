@@ -1,4 +1,4 @@
-package aufgaben;
+package aufgaben.person;
 
 import nl.jqno.equalsverifier.EqualsVerifier;
 import org.junit.jupiter.api.Test;

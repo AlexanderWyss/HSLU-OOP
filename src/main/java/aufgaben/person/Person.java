@@ -1,4 +1,4 @@
-package aufgaben;
+package aufgaben.person;
 
 import java.util.Objects;
 
