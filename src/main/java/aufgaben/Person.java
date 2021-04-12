@@ -2,7 +2,7 @@ package aufgaben;
 
 import java.util.Objects;
 
-public class Person {
+public class Person implements Comparable<Person> {
     private final long id;
     private final String name;
     private final String firstname;
@@ -52,5 +52,10 @@ public class Person {
     @Override
     public final int hashCode() {
         return Objects.hash(id, name, firstname);
+    }
+
+    @Override
+    public int compareTo(Person person) {
+        return Long.compare(id, person.id);
     }
 }

@@ -55,4 +55,28 @@ class PersonTest {
 
         assertNotEquals(personA.hashCode(), personB.hashCode());
     }
+
+    @Test
+    void personsWithSameId_compareTo_return0() {
+        Person personA = new Person(1, "Riva", "Geralt");
+        Person personB = new Person(1, "Riva", "Geralt");
+
+        assertEquals(0, personA.compareTo(personB));
+    }
+
+    @Test
+    void personAWithGreaterId_compareTo_returnPlusOne() {
+        Person personA = new Person(3, "Riva", "Geralt");
+        Person personB = new Person(1, "Riva", "Geralt");
+
+        assertEquals(1, personA.compareTo(personB));
+    }
+
+    @Test
+    void personBWithGreaterId_compareTo_returnMinusOne() {
+        Person personA = new Person(-2, "Riva", "Geralt");
+        Person personB = new Person(1, "Riva", "Geralt");
+
+        assertEquals(-1, personA.compareTo(personB));
+    }
 }
