@@ -22,7 +22,7 @@ class Point {
         this.y = y;
     }
 
-    public void moveRelative(int x, int y) {
+    public void moveRelative(final int x, final int y) {
         this.x += x;
         this.y += y;
     }
@@ -31,11 +31,11 @@ class Point {
         moveRelative(point.getX(), point.getY());
     }
 
-    public void moveRelativeAngle(double angle, double value) {
+    public void moveRelativeAngle(final double angle, final double value) {
         final double radians = toRadians(angle);
-        this.x += round(cos(radians) * value);
-        this.y += round(sin(radians) * value);
+        moveRelative((int) round(cos(radians) * value), (int) round(sin(radians) * value));
     }
+
 
     public int getX() {
         return x;
@@ -60,7 +60,7 @@ class Point {
     }
 
     @Override
-    public final boolean equals(Object o) {
+    public final boolean equals(final Object o) {
         if (this == o) return true;
         if (!(o instanceof Point)) return false;
 
