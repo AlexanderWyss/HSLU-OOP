@@ -4,7 +4,7 @@ import java.util.Objects;
 
 import static java.lang.Math.*;
 
-class Point {
+final class Point {
     private int x;
     private int y;
 

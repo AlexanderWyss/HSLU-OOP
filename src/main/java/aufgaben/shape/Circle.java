@@ -1,6 +1,6 @@
 package aufgaben.shape;
 
-public class Circle extends Shape{
+public final class Circle extends Shape{
     private int diameter;
 
     public Circle(final int x, final int y, final int diameter) {

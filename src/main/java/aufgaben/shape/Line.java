@@ -2,7 +2,7 @@ package aufgaben.shape;
 
 import static java.lang.Math.*;
 
-class Line extends Shape {
+final class Line extends Shape {
     private final Point endPosition;
 
     public Line(final Point position, final Point endPosition) {

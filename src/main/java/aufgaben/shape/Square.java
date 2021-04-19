@@ -1,6 +1,6 @@
 package aufgaben.shape;
 
-public class Square extends Shape {
+public final class Square extends Shape {
     private int length;
 
     protected Square(final int x, final int y, final int length) {

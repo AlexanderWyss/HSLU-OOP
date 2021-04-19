@@ -2,7 +2,8 @@ package aufgaben.elements;
 
 import java.util.Objects;
 
-class Temperature implements Comparable<Temperature> {
+final class Temperature implements Comparable<Temperature> {
+    public static final double KELVIN_OFFSET = 273.15;
     private double celsius;
 
     /**
@@ -37,7 +38,7 @@ class Temperature implements Comparable<Temperature> {
     }
 
     private static double toKelvin(final double celsius) {
-        return celsius + 273.15;
+        return celsius + KELVIN_OFFSET;
     }
 
     public void setKelvin(final double kelvin) {
@@ -45,7 +46,7 @@ class Temperature implements Comparable<Temperature> {
     }
 
     private static double fromKelvin(final double kelvin) {
-        return kelvin - 273.15;
+        return kelvin - KELVIN_OFFSET;
     }
 
     public void addKelvin(final double kelvin) {
@@ -102,5 +103,12 @@ class Temperature implements Comparable<Temperature> {
     @Override
     public int compareTo(Temperature temp) {
         return Double.compare(celsius, temp.celsius);
+    }
+
+    @Override
+    public String toString() {
+        return "Temperature{" +
+                "celsius=" + celsius +
+                '}';
     }
 }

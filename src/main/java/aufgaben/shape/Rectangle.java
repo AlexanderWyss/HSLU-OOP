@@ -1,6 +1,6 @@
 package aufgaben.shape;
 
-public class Rectangle extends Shape {
+public final class Rectangle extends Shape {
     private int width;
     private int height;
 
