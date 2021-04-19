@@ -20,15 +20,15 @@ public final class TemperatureHistory {
         history.clear();
     }
 
-    public Temperature max() {
+    public Temperature max() throws NoSuchElementException {
         return Collections.max(history);
     }
 
-    public Temperature min() {
+    public Temperature min() throws NoSuchElementException {
         return Collections.min(history);
     }
 
-    public Temperature average() {
+    public Temperature average() throws NoSuchElementException {
         return Temperature.celsius(history.stream() //
                 .mapToDouble(Temperature::getCelsius) //
                 .average() //
