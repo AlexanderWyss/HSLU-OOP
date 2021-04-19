@@ -1,6 +1,7 @@
 package aufgaben.elements;
 
 import nl.jqno.equalsverifier.EqualsVerifier;
+import nl.jqno.equalsverifier.Warning;
 import org.junit.jupiter.api.Test;
 
 import static aufgaben.elements.Temperature.*;
@@ -20,11 +21,11 @@ class TemperatureTest {
         Temperature tempA = celsius(26);
         Temperature tempB = celsius(23);
 
-        assertEquals(1, tempA.compareTo(tempB));
+        assertEquals(+1, tempA.compareTo(tempB));
     }
 
     @Test
-    void tempBGreater_compareTo_returnPlusOne() {
+    void tempBGreater_compareTo_returnMinusOne() {
         Temperature tempA = celsius(-22);
         Temperature tempB = celsius(-15);
 
@@ -33,7 +34,7 @@ class TemperatureTest {
 
     @Test
     void verifyEquals() {
-        EqualsVerifier.simple().forClass(Temperature.class).verify();
+        EqualsVerifier.forClass(Temperature.class).suppress(Warning.NONFINAL_FIELDS).verify();
     }
 
     // SW02

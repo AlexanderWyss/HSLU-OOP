@@ -1,6 +1,7 @@
 package aufgaben.elements;
 
 import nl.jqno.equalsverifier.EqualsVerifier;
+import nl.jqno.equalsverifier.Warning;
 import org.junit.jupiter.api.Test;
 
 import static aufgaben.elements.Temperature.celsius;
@@ -35,7 +36,7 @@ class ElementTest {
 
     @Test
     void verifyEquals() {
-        EqualsVerifier.forClass(Element.class).verify();
+        EqualsVerifier.forClass(Element.class).suppress(Warning.ALL_FIELDS_SHOULD_BE_USED).verify();
     }
 
     @Test

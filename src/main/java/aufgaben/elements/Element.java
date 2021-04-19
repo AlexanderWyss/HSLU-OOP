@@ -71,16 +71,12 @@ public abstract class Element implements Comparable<Element> {
             return false;
         }
         Element element = (Element) o;
-        return Objects.equals(element.atomicNumber, atomicNumber)
-                && Objects.equals(element.symbol, symbol)
-                && Objects.equals(element.name, name)
-                && Objects.equals(element.meltingPoint, meltingPoint)
-                && Objects.equals(element.boilingPoint, boilingPoint);
+        return Objects.equals(element.atomicNumber, atomicNumber);
     }
 
     @Override
     public final int hashCode() {
-        return Objects.hash(atomicNumber, symbol, name, meltingPoint, boilingPoint);
+        return Objects.hash(atomicNumber);
     }
 
     @Override

@@ -1,6 +1,6 @@
 package aufgaben.elements;
 
-public class Mercury extends Element {
+public final class Mercury extends Element {
     public Mercury() {
         super(80, "Hg", "Mercury", -38.83f, 357);
     }

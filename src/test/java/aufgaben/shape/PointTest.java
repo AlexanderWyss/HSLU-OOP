@@ -1,6 +1,7 @@
 package aufgaben.shape;
 
 import nl.jqno.equalsverifier.EqualsVerifier;
+import nl.jqno.equalsverifier.Warning;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -8,7 +9,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class PointTest {
     @Test
     void verifyEquals() {
-        EqualsVerifier.simple().forClass(Point.class).verify();
+        EqualsVerifier.forClass(Point.class).suppress(Warning.NONFINAL_FIELDS).verify();
     }
 
     // sw06

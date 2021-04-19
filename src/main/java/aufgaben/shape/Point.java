@@ -73,9 +73,7 @@ final class Point {
         if (!(o instanceof Point)) {
             return false;
         }
-
         Point point = (Point) o;
-
         return Objects.equals(point.x, x) && Objects.equals(point.y, y);
     }
 
