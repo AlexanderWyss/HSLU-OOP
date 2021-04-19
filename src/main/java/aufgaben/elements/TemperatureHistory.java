@@ -3,6 +3,7 @@ package aufgaben.elements;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 public final class TemperatureHistory {
     private final List<Temperature> history = new ArrayList<>();
@@ -25,5 +26,12 @@ public final class TemperatureHistory {
 
     public Temperature min() {
         return Collections.min(history);
+    }
+
+    public Temperature average() {
+        return Temperature.celsius(history.stream() //
+                .mapToDouble(Temperature::getCelsius) //
+                .average() //
+                .orElseThrow(() -> new NoSuchElementException("No Temperature in history.")));
     }
 }

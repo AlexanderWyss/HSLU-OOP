@@ -2,7 +2,10 @@ package aufgaben.elements;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.NoSuchElementException;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class TemperatureHistoryTest {
 
@@ -88,7 +91,14 @@ class TemperatureHistoryTest {
 
         assertEquals(maxTemp, maxFromHistory);
     }
-    
+
+    @Test
+    void emptyHistory_max_throwNoSuchElementException() {
+        TemperatureHistory history = new TemperatureHistory();
+
+        assertThrows(NoSuchElementException.class, history::max);
+    }
+
     @Test
     void historyWithMinTempAtBeginning_min_getMinTemperature() {
         TemperatureHistory history = new TemperatureHistory();
@@ -126,5 +136,31 @@ class TemperatureHistoryTest {
         Temperature minFromHistory = history.min();
 
         assertEquals(minTemp, minFromHistory);
+    }
+
+    @Test
+    void emptyHistory_min_throwNoSuchElementException() {
+        TemperatureHistory history = new TemperatureHistory();
+
+        assertThrows(NoSuchElementException.class, history::min);
+    }
+
+    @Test
+    void historyWith3Temp_average_returnsAverageTemp() {
+        TemperatureHistory history = new TemperatureHistory();
+        history.add(Temperature.celsius(17));
+        history.add(Temperature.celsius(-5));
+        history.add(Temperature.celsius(25));
+
+        Temperature average = history.average();
+
+        assertEquals(12.33333, average.getCelsius(), 0.00001);
+    }
+
+    @Test
+    void emptyHistory_average_throwNoSuchElementException() {
+        TemperatureHistory history = new TemperatureHistory();
+
+        assertThrows(NoSuchElementException.class, history::average);
     }
 }
