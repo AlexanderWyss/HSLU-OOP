@@ -71,7 +71,7 @@ class ElementTest {
 
     private static class TestElement extends Element {
         private TestElement(int atomicNumber) {
-            super(atomicNumber, "", 0, 0);
+            super(atomicNumber, "", "", 0, 0);
         }
     }
 }

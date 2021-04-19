@@ -7,18 +7,20 @@ import static aufgaben.elements.Temperature.celsius;
 public abstract class Element implements Comparable<Element> {
     private final int atomicNumber;
     private final String symbol;
+    private final String name;
     private final Temperature meltingPoint;
     private final Temperature boilingPoint;
 
-    protected Element(final int atomicNumber, final String symbol, final Temperature meltingPoint, final Temperature boilingPoint) {
+    protected Element(final int atomicNumber, final String symbol, final String name, final Temperature meltingPoint, final Temperature boilingPoint) {
         this.atomicNumber = atomicNumber;
         this.symbol = symbol;
+        this.name = name;
         this.meltingPoint = meltingPoint;
         this.boilingPoint = boilingPoint;
     }
 
-    protected Element(final int atomicNumber, final String symbol, final double meltingPointCelsius, final double boilingPointCelsius) {
-        this(atomicNumber, symbol, celsius(meltingPointCelsius), celsius(boilingPointCelsius));
+    protected Element(final int atomicNumber, final String symbol, final String name, final double meltingPointCelsius, final double boilingPointCelsius) {
+        this(atomicNumber, symbol, name, celsius(meltingPointCelsius), celsius(boilingPointCelsius));
     }
 
     public int getAtomicNumber() {
@@ -27,6 +29,10 @@ public abstract class Element implements Comparable<Element> {
 
     public String getSymbol() {
         return symbol;
+    }
+
+    public String getName() {
+        return name;
     }
 
     public Temperature getMeltingPoint() {
@@ -69,13 +75,14 @@ public abstract class Element implements Comparable<Element> {
 
         return Objects.equals(element.atomicNumber, atomicNumber)
                 && Objects.equals(element.symbol, symbol)
+                && Objects.equals(element.name, name)
                 && Objects.equals(element.meltingPoint, meltingPoint)
                 && Objects.equals(element.boilingPoint, boilingPoint);
     }
 
     @Override
     public final int hashCode() {
-        return Objects.hash(atomicNumber, symbol, meltingPoint, boilingPoint);
+        return Objects.hash(atomicNumber, symbol, name, meltingPoint, boilingPoint);
     }
 
     @Override
