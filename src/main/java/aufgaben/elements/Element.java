@@ -37,13 +37,13 @@ public abstract class Element implements Comparable<Element> {
         return boilingPoint;
     }
 
-    public String getAggregationState(Temperature temperature) {
+    public AggregationState getAggregationState(Temperature temperature) {
         if (temperature.getCelsius() >= boilingPoint.getCelsius()) {
-            return "gaseous";
+            return AggregationState.GASEOUS;
         } else if (temperature.getCelsius() >= meltingPoint.getCelsius()) {
-            return "liquid";
+            return AggregationState.LIQUID;
         }
-        return "solid";
+        return AggregationState.SOLID;
     }
 
     @Override
