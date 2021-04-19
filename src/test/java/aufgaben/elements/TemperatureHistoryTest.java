@@ -39,7 +39,7 @@ class TemperatureHistoryTest {
     }
 
     @Test
-    void historyWith2Temperature_clear_getCountReturnZero() {
+    void historyWith3Temperature_clear_getCountReturnZero() {
         TemperatureHistory history = new TemperatureHistory();
         history.add(Temperature.celsius(25));
         history.add(Temperature.celsius(-5));
@@ -48,5 +48,44 @@ class TemperatureHistoryTest {
         history.clear();
 
         assertEquals(0, history.getCount());
+    }
+
+    @Test
+    void historyWithMaxTempAtBeginning_max_getMaxTemperature() {
+        TemperatureHistory history = new TemperatureHistory();
+        Temperature maxTemp = Temperature.celsius(25);
+        history.add(maxTemp);
+        history.add(Temperature.celsius(-5));
+        history.add(Temperature.celsius(17));
+
+        Temperature maxFromHistory = history.max();
+
+        assertEquals(maxTemp, maxFromHistory);
+    }
+
+    @Test
+    void historyWithMaxTempAtEnd_max_getMaxTemperature() {
+        TemperatureHistory history = new TemperatureHistory();
+        Temperature maxTemp = Temperature.celsius(25);
+        history.add(Temperature.celsius(17));
+        history.add(Temperature.celsius(-5));
+        history.add(maxTemp);
+
+        Temperature maxFromHistory = history.max();
+
+        assertEquals(maxTemp, maxFromHistory);
+    }
+
+    @Test
+    void historyWithMaxTempBetween_max_getMaxTemperature() {
+        TemperatureHistory history = new TemperatureHistory();
+        Temperature maxTemp = Temperature.celsius(25);
+        history.add(Temperature.celsius(17));
+        history.add(maxTemp);
+        history.add(Temperature.celsius(-5));
+
+        Temperature maxFromHistory = history.max();
+
+        assertEquals(maxTemp, maxFromHistory);
     }
 }

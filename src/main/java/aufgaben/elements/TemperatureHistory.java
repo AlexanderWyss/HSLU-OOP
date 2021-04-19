@@ -1,6 +1,7 @@
 package aufgaben.elements;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public final class TemperatureHistory {
@@ -16,5 +17,9 @@ public final class TemperatureHistory {
 
     public void clear() {
         history.clear();
+    }
+
+    public Temperature max() {
+        return Collections.max(history);
     }
 }
