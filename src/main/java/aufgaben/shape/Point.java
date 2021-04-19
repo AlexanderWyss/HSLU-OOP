@@ -33,6 +33,7 @@ class Point {
 
     /**
      * Moves the point relative by the value in direction of the angle
+     *
      * @param angle in degrees
      * @param value line length
      */
@@ -66,8 +67,12 @@ class Point {
 
     @Override
     public final boolean equals(final Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Point)) return false;
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof Point)) {
+            return false;
+        }
 
         Point point = (Point) o;
 
