@@ -70,9 +70,7 @@ public abstract class Element implements Comparable<Element> {
         if (!(o instanceof Element)) {
             return false;
         }
-
         Element element = (Element) o;
-
         return Objects.equals(element.atomicNumber, atomicNumber)
                 && Objects.equals(element.symbol, symbol)
                 && Objects.equals(element.name, name)

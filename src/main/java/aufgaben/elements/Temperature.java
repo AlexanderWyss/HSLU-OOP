@@ -89,9 +89,7 @@ final class Temperature implements Comparable<Temperature> {
         if (!(o instanceof Temperature)) {
             return false;
         }
-
         Temperature temperature = (Temperature) o;
-
         return Objects.equals(temperature.celsius, celsius);
     }
 

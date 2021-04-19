@@ -47,10 +47,9 @@ public class Person implements Comparable<Person> {
             return false;
         }
         Person person = (Person) o;
-        if (id != person.id) {
-            return false;
-        }
-        return Objects.equals(firstname, person.firstname) && Objects.equals(name, person.name);
+        return Objects.equals(id, person.id)
+                && Objects.equals(firstname, person.firstname)
+                && Objects.equals(name, person.name);
     }
 
     @Override
