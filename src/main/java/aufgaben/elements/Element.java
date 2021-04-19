@@ -58,8 +58,12 @@ public abstract class Element implements Comparable<Element> {
 
     @Override
     public final boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Element)) return false;
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof Element)) {
+            return false;
+        }
 
         Element element = (Element) o;
 
