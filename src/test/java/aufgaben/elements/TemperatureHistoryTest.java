@@ -88,4 +88,43 @@ class TemperatureHistoryTest {
 
         assertEquals(maxTemp, maxFromHistory);
     }
+    
+    @Test
+    void historyWithMinTempAtBeginning_min_getMinTemperature() {
+        TemperatureHistory history = new TemperatureHistory();
+        Temperature minTemp = Temperature.celsius(-7);
+        history.add(minTemp);
+        history.add(Temperature.celsius(-5));
+        history.add(Temperature.celsius(17));
+
+        Temperature minFromHistory = history.min();
+
+        assertEquals(minTemp, minFromHistory);
+    }
+
+    @Test
+    void historyWithMinTempAtEnd_min_getMinTemperature() {
+        TemperatureHistory history = new TemperatureHistory();
+        Temperature minTemp = Temperature.celsius(-7);
+        history.add(Temperature.celsius(17));
+        history.add(Temperature.celsius(-5));
+        history.add(minTemp);
+
+        Temperature minFromHistory = history.min();
+
+        assertEquals(minTemp, minFromHistory);
+    }
+
+    @Test
+    void historyWithMinTempBetween_min_getMinTemperature() {
+        TemperatureHistory history = new TemperatureHistory();
+        Temperature minTemp = Temperature.celsius(-7);
+        history.add(Temperature.celsius(17));
+        history.add(minTemp);
+        history.add(Temperature.celsius(-5));
+
+        Temperature minFromHistory = history.min();
+
+        assertEquals(minTemp, minFromHistory);
+    }
 }

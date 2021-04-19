@@ -22,4 +22,8 @@ public final class TemperatureHistory {
     public Temperature max() {
         return Collections.max(history);
     }
+
+    public Temperature min() {
+        return Collections.min(history);
+    }
 }
