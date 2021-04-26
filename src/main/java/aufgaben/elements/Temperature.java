@@ -4,26 +4,22 @@ import java.util.Objects;
 
 final class Temperature implements Comparable<Temperature> {
     public static final double KELVIN_OFFSET = 273.15;
-    private double celsius;
+    private final double celsius;
 
     private Temperature() {
-        // Hide default constructor
+        this(0);
     }
 
     private Temperature(final double celsius) {
-        setCelsius(celsius);
+        this.celsius = celsius;
     }
 
     public double getCelsius() {
         return this.celsius;
     }
 
-    public void setCelsius(final double celsius) {
-        this.celsius = celsius;
-    }
-
-    public void addCelsius(final double celsius) {
-        setCelsius(this.celsius + celsius);
+    public Temperature addCelsius(final double celsius) {
+        return celsius(this.celsius + celsius);
     }
 
     public static Temperature celsius(final double celsius) {
@@ -38,16 +34,12 @@ final class Temperature implements Comparable<Temperature> {
         return celsius + KELVIN_OFFSET;
     }
 
-    public void setKelvin(final double kelvin) {
-        setCelsius(fromKelvin(kelvin));
-    }
-
     private static double fromKelvin(final double kelvin) {
         return kelvin - KELVIN_OFFSET;
     }
 
-    public void addKelvin(final double kelvin) {
-        setKelvin(kelvin + getKelvin());
+    public Temperature addKelvin(final double kelvin) {
+        return kelvin(kelvin + getKelvin());
     }
 
     public static Temperature kelvin(final double kelvin) {
@@ -62,16 +54,12 @@ final class Temperature implements Comparable<Temperature> {
         return (celsius * (9. / 5.)) + 32;
     }
 
-    public void setFahrenheit(final double fahrenheit) {
-        setCelsius(fromFahrenheit(fahrenheit));
-    }
-
     private static double fromFahrenheit(final double fahrenheit) {
         return (fahrenheit - 32) * (5. / 9.);
     }
 
-    public void addFahrenheit(final double fahrenheit) {
-        setFahrenheit(fahrenheit + getFahrenheit());
+    public Temperature addFahrenheit(final double fahrenheit) {
+        return fahrenheit(fahrenheit + getFahrenheit());
     }
 
     public static Temperature fahrenheit(final double fahrenheit) {

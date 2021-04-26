@@ -1,13 +1,13 @@
 package aufgaben.elements;
 
 import nl.jqno.equalsverifier.EqualsVerifier;
-import nl.jqno.equalsverifier.Warning;
 import org.junit.jupiter.api.Test;
 
 import static aufgaben.elements.Temperature.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class TemperatureTest {
+
     @Test
     void twoEqualTemp_compareTo_return0() {
         Temperature tempA = celsius(5);
@@ -34,7 +34,7 @@ class TemperatureTest {
 
     @Test
     void verifyEquals() {
-        EqualsVerifier.forClass(Temperature.class).suppress(Warning.NONFINAL_FIELDS).verify();
+        EqualsVerifier.forClass(Temperature.class).verify();
     }
 
     // SW02
@@ -84,68 +84,35 @@ class TemperatureTest {
     }
 
     @Test
-    void newCelsius_setCelsius_correctlySetAndConverted() {
-        Temperature temperature = celsius(0);
-
-        temperature.setCelsius(4.8);
-
-        assertEquals(4.8, temperature.getCelsius(), 0.001);
-        assertEquals(40.64, temperature.getFahrenheit(), 0.001);
-        assertEquals(277.95, temperature.getKelvin(), 0.001);
-    }
-
-    @Test
-    void newCelsius_setFahrenheit_correctlySetAndConverted() {
-        Temperature temperature = celsius(0);
-
-        temperature.setFahrenheit(4.8);
-
-        assertEquals(-15.1111, temperature.getCelsius(), 0.001);
-        assertEquals(4.8, temperature.getFahrenheit(), 0.001);
-        assertEquals(258.0389, temperature.getKelvin(), 0.001);
-    }
-
-    @Test
-    void newCelsius_setKelvin_correctlySetAndConverted() {
-        Temperature temperature = celsius(0);
-
-        temperature.setKelvin(4.8);
-
-        assertEquals(-268.34998, temperature.getCelsius(), 0.001);
-        assertEquals(-451.029964, temperature.getFahrenheit(), 0.001);
-        assertEquals(4.8, temperature.getKelvin(), 0.001);
-    }
-
-    @Test
     void newCelsius_addCelsius_correctlySetAndConverted() {
         Temperature temperature = celsius(5.2);
 
-        temperature.addCelsius(1.5);
+        Temperature resultTemp = temperature.addCelsius(1.5);
 
-        assertEquals(6.7, temperature.getCelsius(), 0.001);
-        assertEquals(44.06, temperature.getFahrenheit(), 0.001);
-        assertEquals(279.85, temperature.getKelvin(), 0.001);
+        assertEquals(6.7, resultTemp.getCelsius(), 0.001);
+        assertEquals(44.06, resultTemp.getFahrenheit(), 0.001);
+        assertEquals(279.85, resultTemp.getKelvin(), 0.001);
     }
 
     @Test
     void newFahrenheit_addFahrenheit_correctlySetAndConverted() {
         Temperature temperature = fahrenheit(5.2);
 
-        temperature.addFahrenheit(4.8);
+        Temperature resultTemp = temperature.addFahrenheit(4.8);
 
-        assertEquals(-12.222, temperature.getCelsius(), 0.001);
-        assertEquals(10, temperature.getFahrenheit(), 0.001);
-        assertEquals(260.928, temperature.getKelvin(), 0.001);
+        assertEquals(-12.222, resultTemp.getCelsius(), 0.001);
+        assertEquals(10, resultTemp.getFahrenheit(), 0.001);
+        assertEquals(260.928, resultTemp.getKelvin(), 0.001);
     }
 
     @Test
     void newKelvin_addKelvin_correctlySetAndConverted() {
         Temperature temperature = kelvin(15);
 
-        temperature.addKelvin(-3.5);
+        Temperature resultTemp = temperature.addKelvin(-3.5);
 
-        assertEquals(-261.65, temperature.getCelsius(), 0.001);
-        assertEquals(-438.97, temperature.getFahrenheit(), 0.001);
-        assertEquals(11.5, temperature.getKelvin(), 0.001);
+        assertEquals(-261.65, resultTemp.getCelsius(), 0.001);
+        assertEquals(-438.97, resultTemp.getFahrenheit(), 0.001);
+        assertEquals(11.5, resultTemp.getKelvin(), 0.001);
     }
 }
