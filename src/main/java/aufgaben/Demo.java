@@ -6,7 +6,6 @@ import org.apache.logging.log4j.Logger;
 import java.io.PrintStream;
 
 class Demo {
-
     private static final Logger LOGGER = LogManager.getLogger(Demo.class);
 
     /**
