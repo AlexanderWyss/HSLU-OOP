@@ -7,7 +7,7 @@ final class Temperature implements Comparable<Temperature> {
     private final double celsius;
 
     private Temperature() {
-        this(0);
+        throw new UnsupportedOperationException("Fuck the default constructor.");
     }
 
     private Temperature(final double celsius) {
