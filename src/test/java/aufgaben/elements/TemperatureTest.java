@@ -148,11 +148,4 @@ class TemperatureTest {
         assertEquals(-438.97, temperature.getFahrenheit(), 0.001);
         assertEquals(11.5, temperature.getKelvin(), 0.001);
     }
-
-    @Test
-    void newDefault_default20Celsius() {
-        Temperature temperature = new Temperature();
-
-        assertEquals(20, temperature.getCelsius(), 0.001);
-    }
 }

@@ -6,11 +6,8 @@ final class Temperature implements Comparable<Temperature> {
     public static final double KELVIN_OFFSET = 273.15;
     private double celsius;
 
-    /**
-     * default 20 degree celsius
-     */
-    public Temperature() {
-        this(20);
+    private Temperature() {
+        // Hide default constructor
     }
 
     private Temperature(final double celsius) {
