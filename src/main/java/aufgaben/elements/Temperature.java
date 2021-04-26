@@ -11,7 +11,7 @@ final class Temperature implements Comparable<Temperature> {
     }
 
     private Temperature(final double celsius) {
-        this.celsius = celsius;
+        setCelsius(celsius);
     }
 
     public double getCelsius() {
@@ -23,7 +23,7 @@ final class Temperature implements Comparable<Temperature> {
     }
 
     public void addCelsius(final double celsius) {
-        this.celsius += celsius;
+        setCelsius(this.celsius + celsius);
     }
 
     public static Temperature celsius(final double celsius) {
@@ -39,7 +39,7 @@ final class Temperature implements Comparable<Temperature> {
     }
 
     public void setKelvin(final double kelvin) {
-        this.celsius = fromKelvin(kelvin);
+        setCelsius(fromKelvin(kelvin));
     }
 
     private static double fromKelvin(final double kelvin) {
@@ -63,7 +63,7 @@ final class Temperature implements Comparable<Temperature> {
     }
 
     public void setFahrenheit(final double fahrenheit) {
-        this.celsius = fromFahrenheit(fahrenheit);
+        setCelsius(fromFahrenheit(fahrenheit));
     }
 
     private static double fromFahrenheit(final double fahrenheit) {
