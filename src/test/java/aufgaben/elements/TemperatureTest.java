@@ -1,12 +1,34 @@
 package aufgaben.elements;
 
 import nl.jqno.equalsverifier.EqualsVerifier;
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import static aufgaben.elements.Temperature.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class TemperatureTest {
+    @SuppressWarnings("ResultOfMethodCallIgnored")
+    @Test
+    void newCelsius_lessThan0Kelvin_throwIllegalArgumentException() {
+        Assertions.assertThatThrownBy(() -> celsius(-274))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("Temperature is below zero kelvin.");
+    }
+
+    @Test
+    void newFahrenheit_lessThan0Kelvin_throwIllegalArgumentException() {
+        Assertions.assertThatThrownBy(() -> fahrenheit(-460))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("Temperature is below zero kelvin.");
+    }
+
+    @Test
+    void newKelvin_lessThan0Kelvin_throwIllegalArgumentException() {
+        Assertions.assertThatThrownBy(() -> kelvin(-0.1))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("Temperature is below zero kelvin.");
+    }
 
     @Test
     void twoEqualTemp_compareTo_return0() {

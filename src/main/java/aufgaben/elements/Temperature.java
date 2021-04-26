@@ -11,6 +11,9 @@ final class Temperature implements Comparable<Temperature> {
     }
 
     private Temperature(final double celsius) {
+        if(celsius < -KELVIN_OFFSET) {
+            throw new IllegalArgumentException("Temperature is below zero kelvin.");
+        }
         this.celsius = celsius;
     }
 
