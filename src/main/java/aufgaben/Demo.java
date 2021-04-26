@@ -1,8 +1,13 @@
 package aufgaben;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import java.io.PrintStream;
 
 class Demo {
+
+    private static final Logger LOGGER = LogManager.getLogger(Demo.class);
 
     /**
      * Returns the greater of two {@code int} values. That is, the
@@ -74,7 +79,7 @@ class Demo {
             value += 0.000025f;
             i++;
         }
-        System.out.println("WhileFloatSmaller1 final value: " + value);
+        LOGGER.debug("WhileFloatSmaller1 final value: {}", value);
         return i;
     }
 
