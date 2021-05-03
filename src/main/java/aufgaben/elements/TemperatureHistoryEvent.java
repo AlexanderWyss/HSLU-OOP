@@ -25,4 +25,13 @@ public class TemperatureHistoryEvent extends EventObject {
     public TemperatureHistoryEventType getType() {
         return type;
     }
+
+    @Override
+    public String toString() {
+        return "TemperatureHistoryEvent{" +
+                "temperature=" + temperature +
+                ", type=" + type +
+                ", source=" + source +
+                '}';
+    }
 }

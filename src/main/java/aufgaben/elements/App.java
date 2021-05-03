@@ -1,5 +1,8 @@
 package aufgaben.elements;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import java.text.DecimalFormat;
 import java.util.Arrays;
 import java.util.Scanner;
@@ -7,15 +10,20 @@ import java.util.stream.Collectors;
 
 public class App {
     public static void main(String[] args) {
-        new App().run();
+        try {
+            new App().run();
+        } catch (Throwable e) {
+            LOGGER.error("Unhandled exception", e);
+        }
     }
 
+    private static final Logger LOGGER = LogManager.getLogger(App.class);
     private static final DecimalFormat FORMATTER = new DecimalFormat("#0.00");
+    private final TemperatureHistory history = new TemperatureHistory();
 
-    private void run() {
-        System.out.println("Temperature History ('exit' to end)");
-        TemperatureHistory history = new TemperatureHistory();
+    public App() {
         history.addListener(event -> {
+            LOGGER.trace("Temperature History event {}", event);
             switch (event.getType()) {
                 case MAX:
                     System.out.println("New max temp: " + tempAsUserReadableString(event.getTemperature()));
@@ -25,24 +33,29 @@ public class App {
                     break;
             }
         });
+    }
+
+    private void run() {
+        System.out.println("Temperature History ('exit' to end)");
         Scanner scanner = new Scanner(System.in);
         boolean exited = false;
         do {
             System.out.print("Temperature: ");
             String input = scanner.next().trim();
+            LOGGER.trace("Input {}", input);
             if ("exit".equals(input)) {
                 exited = true;
                 printStatistics(history);
             } else {
                 try {
-                    Temperature temp = parseTemperature(input);
-                    history.add(temp);
+                    history.add(parseTemperature(input));
                 } catch (TemperatureParseException exception) {
                     System.out.println(exception.getMessage());
+                    //LOGGER.error(exception.getMessage(), exception); // causes problems in ide console :(
                 }
             }
         } while (!exited);
-        System.out.println("Exited");
+        LOGGER.debug("Exit");
     }
 
     private void printStatistics(TemperatureHistory history) {
