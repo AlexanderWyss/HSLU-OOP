@@ -9,6 +9,7 @@ public class App {
     public static void main(String[] args) {
         new App().run();
     }
+
     private static final DecimalFormat FORMATTER = new DecimalFormat("#0.00");
 
     private void run() {
@@ -47,9 +48,11 @@ public class App {
     private void printStatistics(TemperatureHistory history) {
         System.out.println("History Statistics:");
         System.out.println("Nr. of entries: " + history.getCount());
-        System.out.println("Avg. temp: " + tempAsUserReadableString(history.average()));
-        System.out.println("Max temp: " + tempAsUserReadableString(history.max()));
-        System.out.println("Min temp: " + tempAsUserReadableString(history.min()));
+        if (history.getCount() > 0) {
+            System.out.println("Avg. temp: " + tempAsUserReadableString(history.average()));
+            System.out.println("Max temp: " + tempAsUserReadableString(history.max()));
+            System.out.println("Min temp: " + tempAsUserReadableString(history.min()));
+        }
     }
 
     private Temperature parseTemperature(String input) throws TemperatureParseException {
