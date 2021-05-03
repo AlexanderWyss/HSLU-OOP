@@ -69,6 +69,19 @@ final class Temperature implements Comparable<Temperature> {
         return new Temperature(fromFahrenheit(fahrenheit));
     }
 
+    public static Temperature of(final double value, final TemperatureUnit unit) {
+        switch (unit) {
+            case CELSIUS:
+                return celsius(value);
+            case FAHRENHEIT:
+                return fahrenheit(value);
+            case KELVIN:
+                return kelvin(value);
+            default:
+                throw new IllegalArgumentException("Can not handle " + unit.name());
+        }
+    }
+
     @Override
     public final boolean equals(Object o) {
         if (this == o) {

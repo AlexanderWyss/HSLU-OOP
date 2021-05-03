@@ -8,6 +8,25 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class TemperatureTest {
+
+    @Test
+    void of_unitCelsius_valueParsedAsCelsius() {
+        Temperature temp = of(23.5, TemperatureUnit.CELSIUS);
+        assertEquals(23.5, temp.getCelsius());
+    }
+
+    @Test
+    void of_unitFahrenheit_valueParsedAsFahrenheit() {
+        Temperature temp = of(23.5, TemperatureUnit.FAHRENHEIT);
+        assertEquals(23.5, temp.getFahrenheit());
+    }
+
+    @Test
+    void of_unitKelvin_valueParsedAsKelvin() {
+        Temperature temp = of(23.5, TemperatureUnit.KELVIN);
+        assertEquals(23.5, temp.getKelvin());
+    }
+
     @SuppressWarnings("ResultOfMethodCallIgnored")
     @Test
     void newCelsius_lessThan0Kelvin_throwIllegalArgumentException() {
