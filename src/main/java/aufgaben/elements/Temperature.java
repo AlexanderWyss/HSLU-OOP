@@ -78,6 +78,32 @@ final class Temperature implements Comparable<Temperature> {
         }
     }
 
+    public double get(final TemperatureUnit unit) {
+        switch (unit) {
+            case CELSIUS:
+                return getCelsius();
+            case FAHRENHEIT:
+                return getFahrenheit();
+            case KELVIN:
+                return getKelvin();
+            default:
+                throw new IllegalArgumentException("Can not handle " + unit.name());
+        }
+    }
+
+    public Temperature add(final double value, final TemperatureUnit unit) {
+        switch (unit) {
+            case CELSIUS:
+                return addCelsius(value);
+            case FAHRENHEIT:
+                return addFahrenheit(value);
+            case KELVIN:
+                return addKelvin(value);
+            default:
+                throw new IllegalArgumentException("Can not handle " + unit.name());
+        }
+    }
+
     @Override
     public final boolean equals(Object o) {
         if (this == o) {

@@ -35,6 +35,57 @@ class TemperatureTest {
         }
     }
 
+    @Test
+    void get_unitCelsius_valueParsedAsCelsius() {
+        Temperature temp = celsius(23.5);
+        assertEquals(23.5, temp.get(TemperatureUnit.CELSIUS));
+    }
+
+    @Test
+    void get_unitFahrenheit_valueParsedAsFahrenheit() {
+        Temperature temp = fahrenheit(23.5);
+        assertEquals(23.5, temp.get(TemperatureUnit.FAHRENHEIT));
+    }
+
+    @Test
+    void get_unitKelvin_valueParsedAsKelvin() {
+        Temperature temp = kelvin(23.5);
+        assertEquals(23.5, temp.get(TemperatureUnit.KELVIN));
+    }
+
+    @Test
+    void get_supportsAllTemperatureUnits() {
+        for (TemperatureUnit unit : TemperatureUnit.values()) {
+            assertDoesNotThrow(() -> celsius(0).get(unit));
+        }
+    }
+
+    @Test
+    void add_unitCelsius_valueParsedAsCelsius() {
+        Temperature temp = celsius(23.5).add(2.3, TemperatureUnit.CELSIUS);
+        assertEquals(25.8, temp.getCelsius(), 0.00001);
+    }
+
+    @Test
+    void add_unitFahrenheit_valueParsedAsFahrenheit() {
+        Temperature temp = fahrenheit(23.5).add(2.3, TemperatureUnit.FAHRENHEIT);
+        assertEquals(25.8, temp.getFahrenheit(), 0.00001);
+    }
+
+    @Test
+    void add_unitKelvin_valueParsedAsKelvin() {
+        Temperature temp = kelvin(23.5).add(2.3, TemperatureUnit.KELVIN);
+        assertEquals(25.8, temp.getKelvin(), 0.00001);
+    }
+
+    @Test
+    void add_supportsAllTemperatureUnits() {
+        for (TemperatureUnit unit : TemperatureUnit.values()) {
+            Temperature temp = celsius(0).add(1, unit);
+            assertNotNull(temp);
+        }
+    }
+
     @SuppressWarnings("ResultOfMethodCallIgnored")
     @Test
     void newCelsius_lessThan0Kelvin_throwIllegalArgumentException() {
