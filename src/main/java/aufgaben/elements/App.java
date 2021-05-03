@@ -19,10 +19,10 @@ public class App {
             String input = scanner.next().trim();
             if ("exit".equals(input)) {
                 exited = true;
+                printStatistics(history);
             } else {
                 try {
                     Temperature temp = parseTemperature(input);
-                    System.out.println(temp);
                     history.add(temp);
                 } catch (TemperatureParseException exception) {
                     System.out.println(exception.getMessage());
@@ -30,6 +30,14 @@ public class App {
             }
         } while (!exited);
         System.out.println("Exited");
+    }
+
+    private void printStatistics(TemperatureHistory history) {
+        System.out.println("History Statistics:");
+        System.out.println("Nr. of entries: " + history.getCount());
+        System.out.println("Avg. temp: " + history.average().getCelsius() + "C");
+        System.out.println("Max temp: " + history.max().getCelsius() + "C");
+        System.out.println("Min temp: " + history.min().getCelsius() + "C");
     }
 
     private Temperature parseTemperature(String input) throws TemperatureParseException {
@@ -40,7 +48,7 @@ public class App {
         } catch (NumberFormatException e) {
             throw new TemperatureParseException("Invalid value. Not a number.", e);
         } catch (IllegalArgumentException e) {
-            throw new TemperatureParseException("No valid Unit specified. End Temperature with "
+            throw new TemperatureParseException("No valid Unit specified. End Temperature with one of "
                     + Arrays.stream(TemperatureUnit.values()).map(TemperatureUnit::getUnit)
                     .collect(Collectors.joining(", ")), e);
         }
