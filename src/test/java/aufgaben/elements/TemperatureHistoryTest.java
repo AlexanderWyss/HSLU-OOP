@@ -2,12 +2,151 @@ package aufgaben.elements;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.NoSuchElementException;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
 
 class TemperatureHistoryTest {
+
+    @Test
+    void addListener_addTemp_maxAndMinEvent() {
+        TemperatureHistory history = new TemperatureHistory();
+        TestTemperatureHistoryListener listener = new TestTemperatureHistoryListener();
+        history.addListener(listener);
+
+        Temperature temp = Temperature.celsius(15);
+        history.add(temp);
+
+        assertEquals(2, listener.getEvents().size());
+        TemperatureHistoryEvent maxEvent = listener.getEvents().get(0);
+        assertEquals(temp, maxEvent.getTemperature());
+        assertEquals(TemperatureHistoryEventType.MAX, maxEvent.getType());
+        assertEquals(history, maxEvent.getSource());
+        TemperatureHistoryEvent minEvent = listener.getEvents().get(1);
+        assertEquals(temp, minEvent.getTemperature());
+        assertEquals(TemperatureHistoryEventType.MIN, minEvent.getType());
+        assertEquals(history, minEvent.getSource());
+    }
+
+    @Test
+    void addListener_newMaxTemp_maxEvent() {
+        TemperatureHistory history = new TemperatureHistory();
+        history.add(Temperature.celsius(10));
+        TestTemperatureHistoryListener listener = new TestTemperatureHistoryListener();
+        history.addListener(listener);
+
+        Temperature temp = Temperature.celsius(15);
+        history.add(temp);
+
+        TemperatureHistoryEvent event = listener.getEvent();
+        assertEquals(temp, event.getTemperature());
+        assertEquals(TemperatureHistoryEventType.MAX, event.getType());
+        assertEquals(history, event.getSource());
+    }
+
+    @Test
+    void addListener_tempAddedToHistoryBeforeListenerCall() {
+        TemperatureHistory history = new TemperatureHistory();
+        history.add(Temperature.celsius(10));
+        history.addListener(event -> assertEquals(2, history.getCount()));
+        history.add(Temperature.celsius(20));
+    }
+
+    @Test
+    void addListener_newMinTemp_minEvent() {
+        TemperatureHistory history = new TemperatureHistory();
+        history.add(Temperature.celsius(10));
+        TestTemperatureHistoryListener listener = new TestTemperatureHistoryListener();
+        history.addListener(listener);
+
+        Temperature temp = Temperature.celsius(-10);
+        history.add(temp);
+
+        TemperatureHistoryEvent event = listener.getEvent();
+        assertEquals(temp, event.getTemperature());
+        assertEquals(TemperatureHistoryEventType.MIN, event.getType());
+        assertEquals(history, event.getSource());
+    }
+
+    @Test
+    void addListener_addTempEqualToPreviousMaxTemp_noEvent() {
+        TemperatureHistory history = new TemperatureHistory();
+        history.add(Temperature.celsius(10));
+        history.add(Temperature.celsius(5));
+        TestTemperatureHistoryListener listener = new TestTemperatureHistoryListener();
+        history.addListener(listener);
+
+        history.add(Temperature.celsius(10));
+
+        assertEquals(0, listener.getEvents().size());
+    }
+
+    @Test
+    void addListener_addTempEqualToPreviousMinTemp_noEvent() {
+        TemperatureHistory history = new TemperatureHistory();
+        history.add(Temperature.celsius(10));
+        history.add(Temperature.celsius(5));
+        TestTemperatureHistoryListener listener = new TestTemperatureHistoryListener();
+        history.addListener(listener);
+
+        history.add(Temperature.celsius(5));
+
+        assertEquals(0, listener.getEvents().size());
+    }
+
+    @Test
+    void addListener_neitherMaxOrMinValue_noEvent() {
+        TemperatureHistory history = new TemperatureHistory();
+        history.add(Temperature.celsius(10));
+        history.add(Temperature.celsius(5));
+        TestTemperatureHistoryListener listener = new TestTemperatureHistoryListener();
+        history.addListener(listener);
+
+        history.add(Temperature.celsius(7));
+
+        assertEquals(0, listener.getEvents().size());
+    }
+
+    @Test
+    void historyWithListener_removeListener_noMoreEvents() {
+        TemperatureHistory history = new TemperatureHistory();
+        history.add(Temperature.celsius(10));
+        TestTemperatureHistoryListener listener = new TestTemperatureHistoryListener();
+        history.addListener(listener);
+        history.add(Temperature.celsius(-10));
+
+        history.removeListener(listener);
+        history.add(Temperature.celsius(-20));
+
+        assertEquals(1, listener.getEvents().size());
+    }
+
+    @Test
+    void historyAddNullListener_newMaxTemp_noException() {
+        TemperatureHistory history = new TemperatureHistory();
+        history.add(Temperature.celsius(10));
+
+        history.addListener(null);
+
+        assertDoesNotThrow(() -> history.add(Temperature.celsius(20)));
+    }
+
+    @Test
+    void historyWith2Listeners_newMaxTemp_bothListenerCalled() {
+        TemperatureHistory history = new TemperatureHistory();
+        history.add(Temperature.celsius(10));
+        TestTemperatureHistoryListener listener1 = new TestTemperatureHistoryListener();
+        history.addListener(listener1);
+        TestTemperatureHistoryListener listener2 = new TestTemperatureHistoryListener();
+        history.addListener(listener2);
+
+        history.add(Temperature.celsius(20));
+
+        assertEquals(1, listener1.getEvents().size());
+        assertEquals(1, listener2.getEvents().size());
+    }
 
     @Test
     void newHistory_getCount_zero() {
@@ -162,5 +301,23 @@ class TemperatureHistoryTest {
         TemperatureHistory history = new TemperatureHistory();
 
         assertThrows(NoSuchElementException.class, history::average);
+    }
+
+    private class TestTemperatureHistoryListener implements TemperatureHistoryListener {
+        private List<TemperatureHistoryEvent> events = new ArrayList<>();
+
+        @Override
+        public void temperatureHistoryPerformed(TemperatureHistoryEvent event) {
+            this.events.add(event);
+        }
+
+        public TemperatureHistoryEvent getEvent() {
+            assertEquals(1, events.size());
+            return events.get(0);
+        }
+
+        public List<TemperatureHistoryEvent> getEvents() {
+            return events;
+        }
     }
 }
