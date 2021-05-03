@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 
 import static aufgaben.elements.Temperature.*;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 class TemperatureTest {
 
@@ -25,6 +25,14 @@ class TemperatureTest {
     void of_unitKelvin_valueParsedAsKelvin() {
         Temperature temp = of(23.5, TemperatureUnit.KELVIN);
         assertEquals(23.5, temp.getKelvin());
+    }
+
+    @Test
+    void of_supportsAllTemperatureUnits() {
+        for (TemperatureUnit unit : TemperatureUnit.values()) {
+            Temperature temp = of(0, unit);
+            assertNotNull(temp);
+        }
     }
 
     @SuppressWarnings("ResultOfMethodCallIgnored")
