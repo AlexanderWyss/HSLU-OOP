@@ -6,12 +6,8 @@ final class Temperature implements Comparable<Temperature> {
     public static final double KELVIN_OFFSET = 273.15;
     private final double celsius;
 
-    private Temperature() {
-        throw new UnsupportedOperationException("Fuck the default constructor.");
-    }
-
     private Temperature(final double celsius) {
-        if(celsius < -KELVIN_OFFSET) {
+        if (celsius < -KELVIN_OFFSET) {
             throw new IllegalArgumentException("Temperature is below zero kelvin.");
         }
         this.celsius = celsius;
