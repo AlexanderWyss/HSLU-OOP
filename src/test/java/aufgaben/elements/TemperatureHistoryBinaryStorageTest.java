@@ -7,12 +7,15 @@ import org.junit.jupiter.api.io.TempDir;
 
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.nio.ByteBuffer;
 import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.Iterator;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class TemperatureHistoryStorageTest {
+class TemperatureHistoryBinaryStorageTest {
     @TempDir
     Path testDir;
     Path testFile;
@@ -53,13 +56,28 @@ class TemperatureHistoryStorageTest {
         assertArrayEquals(expectedResult, readBytes());
     }
 
+    @Test
+    void read_fileWithTemperatureHistory_correctFile() throws IOException, URISyntaxException {
+        TemperatureHistoryBinaryStorage historyStorage = new TemperatureHistoryBinaryStorage(Paths.get(getClass().getResource("temperature.dat").toURI()));
+        TemperatureHistory history = historyStorage.read();
+
+        assertEquals(5, history.getCount());
+        Iterator<Temperature> iterator = history.iterator();
+        assertEquals(5, iterator.next().getCelsius());
+        assertEquals(4, iterator.next().getCelsius());
+        assertEquals(10, iterator.next().getCelsius());
+        assertEquals(16, iterator.next().getCelsius());
+        assertEquals(-4, iterator.next().getCelsius());
+        assertFalse(iterator.hasNext());
+    }
+
     private byte[] readBytes() throws IOException {
         try (FileInputStream fis = new FileInputStream(testFile.toFile())) {
             return fis.readAllBytes();
         }
     }
 
-    private TemperatureHistoryStorage getStorage() {
-        return new TemperatureHistoryStorage(testFile);
+    private TemperatureHistoryBinaryStorage getStorage() {
+        return new TemperatureHistoryBinaryStorage(testFile);
     }
 }

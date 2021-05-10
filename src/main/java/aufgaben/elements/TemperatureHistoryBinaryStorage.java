@@ -1,15 +1,12 @@
 package aufgaben.elements;
 
-import java.io.DataOutputStream;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
+import java.io.*;
 import java.nio.file.Path;
 
-public class TemperatureHistoryStorage {
+public class TemperatureHistoryBinaryStorage {
     private final Path filePath;
 
-    public TemperatureHistoryStorage(final Path filePath) {
+    public TemperatureHistoryBinaryStorage(final Path filePath) {
         this.filePath = filePath;
     }
 
@@ -23,6 +20,17 @@ public class TemperatureHistoryStorage {
             for (Temperature temp : history) {
                 dos.writeDouble(temp.getCelsius());
             }
+        }
+    }
+
+    public TemperatureHistory read() throws IOException {
+        try (DataInputStream dis = new DataInputStream(new FileInputStream(filePath.toFile()))) {
+            TemperatureHistory history = new TemperatureHistory();
+            int count = dis.readInt();
+            for (int i = 0; i < count; i++) {
+                history.add(Temperature.celsius(dis.readDouble()));
+            }
+            return history;
         }
     }
 }

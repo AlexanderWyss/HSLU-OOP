@@ -3,7 +3,7 @@ package aufgaben.elements;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.text.DecimalFormat;
@@ -14,12 +14,17 @@ import java.util.stream.Collectors;
 public class App {
     private static final Path FILE_PATH = Paths.get("C:\\Users\\alexs\\development\\HSLU-OOP\\src\\main\\resources\\temperature.dat");
 
-
     public static void main(String[] args) {
         try {
-            App app = new App();
+            TemperatureHistoryBinaryStorage storage = new TemperatureHistoryBinaryStorage(FILE_PATH);
+            App app;
+            if (Files.exists(FILE_PATH)) {
+                app = new App(storage.read());
+            } else {
+                app = new App();
+            }
             app.run();
-            app.safe();
+            storage.write(app.getHistory());
         } catch (Throwable e) {
             LOGGER.error("Unhandled exception", e);
         }
@@ -27,9 +32,14 @@ public class App {
 
     private static final Logger LOGGER = LogManager.getLogger(App.class);
     private static final DecimalFormat FORMATTER = new DecimalFormat("#0.00");
-    private final TemperatureHistory history = new TemperatureHistory();
+    private final TemperatureHistory history;
 
     public App() {
+        this(new TemperatureHistory());
+    }
+
+    public App(TemperatureHistory history) {
+        this.history = history;
         history.addListener(event -> {
             LOGGER.trace("Temperature History event {}", event);
             switch (event.getType()) {
@@ -94,11 +104,7 @@ public class App {
         return FORMATTER.format(temp.getCelsius()) + "C";
     }
 
-    private void safe() {
-        try {
-            new TemperatureHistoryStorage(FILE_PATH).write(history);
-        } catch (IOException ioe) {
-            LOGGER.error("Error saving temperature history.", ioe);
-        }
+    public TemperatureHistory getHistory() {
+        return history;
     }
 }
