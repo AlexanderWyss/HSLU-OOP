@@ -44,10 +44,10 @@ public class App {
             LOGGER.trace("Temperature History event {}", event);
             switch (event.getType()) {
                 case MAX:
-                    System.out.println("New max temp: " + tempAsUserReadableString(event.getTemperature()));
+                    System.out.println("New max temp: " + tempAsUserReadableString(event.getMeasurePoint().getTemperature()));
                     break;
                 case MIN:
-                    System.out.println("New min temp: " + tempAsUserReadableString(event.getTemperature()));
+                    System.out.println("New min temp: " + tempAsUserReadableString(event.getMeasurePoint().getTemperature()));
                     break;
             }
         });
@@ -81,8 +81,8 @@ public class App {
         System.out.println("Nr. of entries: " + history.getCount());
         if (history.getCount() > 0) {
             System.out.println("Avg. temp: " + tempAsUserReadableString(history.average()));
-            System.out.println("Max temp: " + tempAsUserReadableString(history.max()));
-            System.out.println("Min temp: " + tempAsUserReadableString(history.min()));
+            System.out.println("Max temp: " + tempAsUserReadableString(history.max().getTemperature()));
+            System.out.println("Min temp: " + tempAsUserReadableString(history.min().getTemperature()));
         }
     }
 

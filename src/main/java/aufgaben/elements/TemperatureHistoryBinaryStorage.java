@@ -17,8 +17,8 @@ public class TemperatureHistoryBinaryStorage {
         }
         try (DataOutputStream dos = new DataOutputStream(new FileOutputStream(file))) {
             dos.writeInt(history.getCount());
-            for (Temperature temp : history) {
-                dos.writeDouble(temp.getCelsius());
+            for (MeasurePoint measurePoint : history) {
+                dos.writeDouble(measurePoint.getTemperature().getCelsius());
             }
         }
     }
@@ -28,7 +28,7 @@ public class TemperatureHistoryBinaryStorage {
             TemperatureHistory history = new TemperatureHistory();
             int count = dis.readInt();
             for (int i = 0; i < count; i++) {
-                history.add(Temperature.celsius(dis.readDouble()));
+                history.add(Temperature.celsius(dis.readDouble())); // datetime wrong :(
             }
             return history;
         }

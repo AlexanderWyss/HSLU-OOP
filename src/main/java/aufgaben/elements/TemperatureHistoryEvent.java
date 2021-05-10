@@ -3,7 +3,7 @@ package aufgaben.elements;
 import java.util.EventObject;
 
 public class TemperatureHistoryEvent extends EventObject {
-    private final Temperature temperature;
+    private final MeasurePoint measurePoint;
     private final TemperatureHistoryEventType type;
 
     /**
@@ -12,14 +12,14 @@ public class TemperatureHistoryEvent extends EventObject {
      * @param source the object on which the Event initially occurred
      * @throws IllegalArgumentException if source is null
      */
-    public TemperatureHistoryEvent(final Object source, final Temperature temperature, final TemperatureHistoryEventType type) {
+    public TemperatureHistoryEvent(final Object source, final MeasurePoint measurePoint, final TemperatureHistoryEventType type) {
         super(source);
-        this.temperature = temperature;
+        this.measurePoint = measurePoint;
         this.type = type;
     }
 
-    public Temperature getTemperature() {
-        return temperature;
+    public MeasurePoint getMeasurePoint() {
+        return measurePoint;
     }
 
     public TemperatureHistoryEventType getType() {
@@ -29,7 +29,7 @@ public class TemperatureHistoryEvent extends EventObject {
     @Override
     public String toString() {
         return "TemperatureHistoryEvent{" +
-                "temperature=" + temperature +
+                "temperature=" + measurePoint +
                 ", type=" + type +
                 ", source=" + source +
                 '}';

@@ -21,11 +21,11 @@ class TemperatureHistoryTest {
 
         assertEquals(2, listener.getEvents().size());
         TemperatureHistoryEvent maxEvent = listener.getEvents().get(0);
-        assertEquals(temp, maxEvent.getTemperature());
+        assertEquals(temp, maxEvent.getMeasurePoint().getTemperature());
         assertEquals(TemperatureHistoryEventType.MAX, maxEvent.getType());
         assertEquals(history, maxEvent.getSource());
         TemperatureHistoryEvent minEvent = listener.getEvents().get(1);
-        assertEquals(temp, minEvent.getTemperature());
+        assertEquals(temp, minEvent.getMeasurePoint().getTemperature());
         assertEquals(TemperatureHistoryEventType.MIN, minEvent.getType());
         assertEquals(history, minEvent.getSource());
     }
@@ -41,7 +41,7 @@ class TemperatureHistoryTest {
         history.add(temp);
 
         TemperatureHistoryEvent event = listener.getEvent();
-        assertEquals(temp, event.getTemperature());
+        assertEquals(temp, event.getMeasurePoint().getTemperature());
         assertEquals(TemperatureHistoryEventType.MAX, event.getType());
         assertEquals(history, event.getSource());
     }
@@ -65,7 +65,7 @@ class TemperatureHistoryTest {
         history.add(temp);
 
         TemperatureHistoryEvent event = listener.getEvent();
-        assertEquals(temp, event.getTemperature());
+        assertEquals(temp, event.getMeasurePoint().getTemperature());
         assertEquals(TemperatureHistoryEventType.MIN, event.getType());
         assertEquals(history, event.getSource());
     }
@@ -200,7 +200,7 @@ class TemperatureHistoryTest {
         history.add(Temperature.celsius(-5));
         history.add(Temperature.celsius(17));
 
-        Temperature maxFromHistory = history.max();
+        Temperature maxFromHistory = history.max().getTemperature();
 
         assertEquals(maxTemp, maxFromHistory);
     }
@@ -213,7 +213,7 @@ class TemperatureHistoryTest {
         history.add(Temperature.celsius(-5));
         history.add(maxTemp);
 
-        Temperature maxFromHistory = history.max();
+        Temperature maxFromHistory = history.max().getTemperature();
 
         assertEquals(maxTemp, maxFromHistory);
     }
@@ -226,7 +226,7 @@ class TemperatureHistoryTest {
         history.add(maxTemp);
         history.add(Temperature.celsius(-5));
 
-        Temperature maxFromHistory = history.max();
+        Temperature maxFromHistory = history.max().getTemperature();
 
         assertEquals(maxTemp, maxFromHistory);
     }
@@ -246,7 +246,7 @@ class TemperatureHistoryTest {
         history.add(Temperature.celsius(-5));
         history.add(Temperature.celsius(17));
 
-        Temperature minFromHistory = history.min();
+        Temperature minFromHistory = history.min().getTemperature();
 
         assertEquals(minTemp, minFromHistory);
     }
@@ -259,7 +259,7 @@ class TemperatureHistoryTest {
         history.add(Temperature.celsius(-5));
         history.add(minTemp);
 
-        Temperature minFromHistory = history.min();
+        Temperature minFromHistory = history.min().getTemperature();
 
         assertEquals(minTemp, minFromHistory);
     }
@@ -272,7 +272,7 @@ class TemperatureHistoryTest {
         history.add(minTemp);
         history.add(Temperature.celsius(-5));
 
-        Temperature minFromHistory = history.min();
+        Temperature minFromHistory = history.min().getTemperature();
 
         assertEquals(minTemp, minFromHistory);
     }
@@ -303,8 +303,8 @@ class TemperatureHistoryTest {
         assertThrows(NoSuchElementException.class, history::average);
     }
 
-    private class TestTemperatureHistoryListener implements TemperatureHistoryListener {
-        private List<TemperatureHistoryEvent> events = new ArrayList<>();
+    private static class TestTemperatureHistoryListener implements TemperatureHistoryListener {
+        private final List<TemperatureHistoryEvent> events = new ArrayList<>();
 
         @Override
         public void temperatureHistoryPerformed(TemperatureHistoryEvent event) {

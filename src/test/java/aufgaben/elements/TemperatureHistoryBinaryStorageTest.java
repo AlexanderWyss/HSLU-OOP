@@ -62,12 +62,12 @@ class TemperatureHistoryBinaryStorageTest {
         TemperatureHistory history = historyStorage.read();
 
         assertEquals(5, history.getCount());
-        Iterator<Temperature> iterator = history.iterator();
-        assertEquals(5, iterator.next().getCelsius());
-        assertEquals(4, iterator.next().getCelsius());
-        assertEquals(10, iterator.next().getCelsius());
-        assertEquals(16, iterator.next().getCelsius());
-        assertEquals(-4, iterator.next().getCelsius());
+        Iterator<MeasurePoint> iterator = history.iterator();
+        assertEquals(5, iterator.next().getTemperature().getCelsius());
+        assertEquals(4, iterator.next().getTemperature().getCelsius());
+        assertEquals(10, iterator.next().getTemperature().getCelsius());
+        assertEquals(16, iterator.next().getTemperature().getCelsius());
+        assertEquals(-4, iterator.next().getTemperature().getCelsius());
         assertFalse(iterator.hasNext());
     }
 

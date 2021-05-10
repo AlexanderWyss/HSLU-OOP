@@ -1,15 +1,19 @@
 package aufgaben.elements;
 
+import java.time.LocalDateTime;
 import java.util.*;
 
-public final class TemperatureHistory implements Iterable<Temperature> {
-    private final List<Temperature> history = new ArrayList<>();
+public final class TemperatureHistory implements Iterable<MeasurePoint> {
+    private final List<MeasurePoint> history = new ArrayList<>();
     private final List<TemperatureHistoryListener> listeners = new ArrayList<>();
 
-    public void add(Temperature temperature) {
-        List<TemperatureHistoryEvent> events = generateEvents(temperature);
-        history.add(temperature);
+    public void add(MeasurePoint measurePoint) {
+        List<TemperatureHistoryEvent> events = generateEvents(measurePoint);
+        history.add(measurePoint);
         fireEvents(events);
+    }
+    public void add(Temperature temperature) {
+        add(new MeasurePoint(temperature, LocalDateTime.now()));
     }
 
     private void fireEvents(List<TemperatureHistoryEvent> events) {
@@ -18,13 +22,13 @@ public final class TemperatureHistory implements Iterable<Temperature> {
         }
     }
 
-    private List<TemperatureHistoryEvent> generateEvents(Temperature temperature) {
+    private List<TemperatureHistoryEvent> generateEvents(MeasurePoint measurePoint) {
         List<TemperatureHistoryEvent> events = new ArrayList<>();
-        if (history.size() == 0 || max().getCelsius() < temperature.getCelsius()) {
-            events.add(new TemperatureHistoryEvent(this, temperature, TemperatureHistoryEventType.MAX));
+        if (history.size() == 0 || max().getTemperature().getCelsius() < measurePoint.getTemperature().getCelsius()) {
+            events.add(new TemperatureHistoryEvent(this, measurePoint, TemperatureHistoryEventType.MAX));
         }
-        if (history.size() == 0 || min().getCelsius() > temperature.getCelsius()) {
-            events.add(new TemperatureHistoryEvent(this, temperature, TemperatureHistoryEventType.MIN));
+        if (history.size() == 0 || min().getTemperature().getCelsius() > measurePoint.getTemperature().getCelsius()) {
+            events.add(new TemperatureHistoryEvent(this, measurePoint, TemperatureHistoryEventType.MIN));
         }
         return events;
     }
@@ -43,17 +47,17 @@ public final class TemperatureHistory implements Iterable<Temperature> {
         history.clear();
     }
 
-    public Temperature max() throws NoSuchElementException {
+    public MeasurePoint max() throws NoSuchElementException {
         return Collections.max(history);
     }
 
-    public Temperature min() throws NoSuchElementException {
+    public MeasurePoint min() throws NoSuchElementException {
         return Collections.min(history);
     }
 
     public Temperature average() throws NoSuchElementException {
         return Temperature.celsius(history.stream() //
-                .mapToDouble(Temperature::getCelsius) //
+                .mapToDouble(measurePoint -> measurePoint.getTemperature().getCelsius()) //
                 .average() //
                 .orElseThrow(() -> new NoSuchElementException("No Temperature in history.")));
     }
@@ -69,7 +73,7 @@ public final class TemperatureHistory implements Iterable<Temperature> {
     }
 
     @Override
-    public Iterator<Temperature> iterator() {
+    public Iterator<MeasurePoint> iterator() {
         return history.iterator();
     }
 }
