@@ -1,11 +1,8 @@
 package aufgaben.elements;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.NoSuchElementException;
+import java.util.*;
 
-public final class TemperatureHistory {
+public final class TemperatureHistory implements Iterable<Temperature> {
     private final List<Temperature> history = new ArrayList<>();
     private final List<TemperatureHistoryListener> listeners = new ArrayList<>();
 
@@ -69,5 +66,10 @@ public final class TemperatureHistory {
 
     public void removeListener(TemperatureHistoryListener listener) {
         listeners.remove(listener);
+    }
+
+    @Override
+    public Iterator<Temperature> iterator() {
+        return history.iterator();
     }
 }

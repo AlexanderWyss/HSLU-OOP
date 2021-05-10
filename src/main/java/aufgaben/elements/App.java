@@ -3,15 +3,23 @@ package aufgaben.elements;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.text.DecimalFormat;
 import java.util.Arrays;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 
 public class App {
+    private static final Path FILE_PATH = Paths.get("C:\\Users\\alexs\\development\\HSLU-OOP\\src\\main\\resources\\temperature.dat");
+
+
     public static void main(String[] args) {
         try {
-            new App().run();
+            App app = new App();
+            app.run();
+            app.safe();
         } catch (Throwable e) {
             LOGGER.error("Unhandled exception", e);
         }
@@ -84,5 +92,13 @@ public class App {
 
     private String tempAsUserReadableString(final Temperature temp) {
         return FORMATTER.format(temp.getCelsius()) + "C";
+    }
+
+    private void safe() {
+        try {
+            new TemperatureHistoryStorage(FILE_PATH).write(history);
+        } catch (IOException ioe) {
+            LOGGER.error("Error saving temperature history.", ioe);
+        }
     }
 }
