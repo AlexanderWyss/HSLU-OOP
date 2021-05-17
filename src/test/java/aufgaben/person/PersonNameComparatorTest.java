@@ -65,6 +65,21 @@ class PersonNameComparatorTest {
         assertThat(sortedPersons, contains(a, b, c, d, e));
     }
 
+    @Test
+    void multiplePersonInList_sortWithLambda_correctlyOrdered() {
+        Person a = new Person(0, "NameA", "FirstnameA");
+        Person b = new Person(0, "NameA", "FirstnameB");
+        Person c = new Person(0, "NameB", "FirstnameA");
+        Person d = new Person(0, "NameB", "FirstnameB");
+        Person e = new Person(0, "NameC", "FirstnameA");
+
+        List<Person> sortedPersons = Stream.of(d, a, c, b, e)
+                .sorted(Comparator.comparing(Person::getFullName))
+                .collect(Collectors.toList());
+
+        assertThat(sortedPersons, contains(a, b, c, d, e));
+    }
+
     private Comparator<Person> getComparator() {
         return new PersonNameComparator();
     }
