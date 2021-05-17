@@ -297,10 +297,9 @@ class TemperatureHistoryTest {
     }
 
     @Test
-    void emptyHistory_average_throwNoSuchElementException() {
+    void emptyHistory_average_returnZero() {
         TemperatureHistory history = new TemperatureHistory();
-
-        assertThrows(NoSuchElementException.class, history::average);
+        assertEquals(0, history.average().getCelsius());
     }
 
     private static class TestTemperatureHistoryListener implements TemperatureHistoryListener {

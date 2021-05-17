@@ -2,6 +2,7 @@ package aufgaben.elements;
 
 import java.time.LocalDateTime;
 import java.util.*;
+import java.util.stream.Collectors;
 
 public final class TemperatureHistory implements Iterable<MeasurePoint> {
     private final List<MeasurePoint> history = new ArrayList<>();
@@ -55,11 +56,8 @@ public final class TemperatureHistory implements Iterable<MeasurePoint> {
         return Collections.min(history);
     }
 
-    public Temperature average() throws NoSuchElementException {
-        return Temperature.celsius(history.stream() //
-                .mapToDouble(measurePoint -> measurePoint.getTemperature().getCelsius()) //
-                .average() //
-                .orElseThrow(() -> new NoSuchElementException("No Temperature in history.")));
+    public Temperature average() {
+        return Temperature.celsius(history.stream().collect(Collectors.averagingDouble(m -> m.getTemperature().getCelsius())));
     }
 
     public void addListener(TemperatureHistoryListener listener) {
