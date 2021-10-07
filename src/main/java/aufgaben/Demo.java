@@ -14,9 +14,9 @@ class Demo {
      * {@link Integer#MAX_VALUE}. If the arguments have the same value,
      * the result is that same value.
      *
-     * @param   a   an argument.
-     * @param   b   another argument.
-     * @return  the larger of {@code a} and {@code b}.
+     * @param a an argument.
+     * @param b another argument.
+     * @return the larger of {@code a} and {@code b}.
      */
     public int max(int a, int b) {
         return a > b ? a : b;
@@ -91,6 +91,10 @@ class Demo {
     }
 
     public void printBox(int height, int width, PrintStream out) {
+        String border = "#".repeat(width) + System.lineSeparator();
+        String middle = "#" + " ".repeat(width - 2) + "#" + System.lineSeparator();
+        out.print(border + middle.repeat(height - 2) + border);
+        /*
         StringBuilder border = new StringBuilder();
         StringBuilder middle = new StringBuilder();
         for (int currentWidth = 1; currentWidth <= width; currentWidth++) {
@@ -108,6 +112,7 @@ class Demo {
                 out.println(middle);
             }
         }
+         */
         /*
         for (int currentHeight = 1; currentHeight <= height; currentHeight++) {
             for (int currentWidth = 1; currentWidth <= width; currentWidth++) {
