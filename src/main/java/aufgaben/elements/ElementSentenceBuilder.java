@@ -1,5 +1,7 @@
 package aufgaben.elements;
 
+import aufgaben.temperature.Temperature;
+
 public class ElementSentenceBuilder {
     public String build(Temperature temperature, Element element) {
         AggregationState state = element.getAggregationState(temperature);

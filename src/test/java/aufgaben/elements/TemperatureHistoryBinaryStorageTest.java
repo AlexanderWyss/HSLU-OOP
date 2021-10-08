@@ -1,5 +1,9 @@
 package aufgaben.elements;
 
+import aufgaben.temperature.Temperature;
+import aufgaben.temperature.history.MeasurePoint;
+import aufgaben.temperature.history.TemperatureHistory;
+import aufgaben.temperature.history.TemperatureHistoryBinaryStorage;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

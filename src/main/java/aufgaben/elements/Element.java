@@ -1,8 +1,10 @@
 package aufgaben.elements;
 
+import aufgaben.temperature.Temperature;
+
 import java.util.Objects;
 
-import static aufgaben.elements.Temperature.celsius;
+import static aufgaben.temperature.Temperature.celsius;
 
 public abstract class Element implements Comparable<Element> {
     private final int atomicNumber;

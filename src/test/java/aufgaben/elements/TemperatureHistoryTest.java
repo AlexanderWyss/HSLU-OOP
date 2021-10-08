@@ -1,5 +1,10 @@
 package aufgaben.elements;
 
+import aufgaben.temperature.Temperature;
+import aufgaben.temperature.history.TemperatureHistory;
+import aufgaben.temperature.history.TemperatureHistoryEvent;
+import aufgaben.temperature.history.TemperatureHistoryEventType;
+import aufgaben.temperature.history.TemperatureHistoryListener;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;

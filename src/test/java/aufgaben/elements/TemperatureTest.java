@@ -1,9 +1,11 @@
 package aufgaben.elements;
 
+import aufgaben.temperature.Temperature;
+import aufgaben.temperature.TemperatureUnit;
 import nl.jqno.equalsverifier.EqualsVerifier;
 import org.junit.jupiter.api.Test;
 
-import static aufgaben.elements.Temperature.*;
+import static aufgaben.temperature.Temperature.*;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.*;
 

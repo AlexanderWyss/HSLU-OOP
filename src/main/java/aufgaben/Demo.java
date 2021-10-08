@@ -94,36 +94,5 @@ class Demo {
         String border = "#".repeat(width) + System.lineSeparator();
         String middle = "#" + " ".repeat(width - 2) + "#" + System.lineSeparator();
         out.print(border + middle.repeat(height - 2) + border);
-        /*
-        StringBuilder border = new StringBuilder();
-        StringBuilder middle = new StringBuilder();
-        for (int currentWidth = 1; currentWidth <= width; currentWidth++) {
-            if (currentWidth == 1 || currentWidth == width) {
-                middle.append("#");
-            } else {
-                middle.append(" ");
-            }
-            border.append("#");
-        }
-        for (int currentHeight = 1; currentHeight <= height; currentHeight++) {
-            if (currentHeight == 1 || currentHeight == height) {
-                out.println(border);
-            } else {
-                out.println(middle);
-            }
-        }
-         */
-        /*
-        for (int currentHeight = 1; currentHeight <= height; currentHeight++) {
-            for (int currentWidth = 1; currentWidth <= width; currentWidth++) {
-                if (currentHeight == 1 || currentHeight == height || currentWidth == 1 || currentWidth == width) {
-                    out.print("#");
-                } else {
-                    out.print(" ");
-                }
-            }
-            out.println();
-        }
-        */
     }
 }

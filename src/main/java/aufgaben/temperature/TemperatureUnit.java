@@ -1,4 +1,4 @@
-package aufgaben.elements;
+package aufgaben.temperature;
 
 public enum TemperatureUnit {
     CELSIUS("C"), FAHRENHEIT("F"), KELVIN("K");

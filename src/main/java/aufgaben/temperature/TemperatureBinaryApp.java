@@ -1,5 +1,7 @@
-package aufgaben.elements;
+package aufgaben.temperature;
 
+import aufgaben.temperature.history.TemperatureHistory;
+import aufgaben.temperature.history.TemperatureHistoryBinaryStorage;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -11,17 +13,17 @@ import java.util.Arrays;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 
-public class App {
+public class TemperatureBinaryApp {
     private static final Path FILE_PATH = Paths.get("C:\\Users\\alexs\\development\\HSLU-OOP\\src\\main\\resources\\temperature.dat");
 
     public static void main(String[] args) {
         try {
             TemperatureHistoryBinaryStorage storage = new TemperatureHistoryBinaryStorage(FILE_PATH);
-            App app;
+            TemperatureBinaryApp app;
             if (Files.exists(FILE_PATH)) {
-                app = new App(storage.read());
+                app = new TemperatureBinaryApp(storage.read());
             } else {
-                app = new App();
+                app = new TemperatureBinaryApp();
             }
             app.run();
             storage.write(app.getHistory());
@@ -30,15 +32,15 @@ public class App {
         }
     }
 
-    private static final Logger LOGGER = LogManager.getLogger(App.class);
+    private static final Logger LOGGER = LogManager.getLogger(TemperatureBinaryApp.class);
     private static final DecimalFormat FORMATTER = new DecimalFormat("#0.00");
     private final TemperatureHistory history;
 
-    public App() {
+    public TemperatureBinaryApp() {
         this(new TemperatureHistory());
     }
 
-    public App(TemperatureHistory history) {
+    public TemperatureBinaryApp(TemperatureHistory history) {
         this.history = history;
         history.addListener(event -> {
             LOGGER.trace("Temperature History event {}", event);

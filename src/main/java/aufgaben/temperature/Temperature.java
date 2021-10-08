@@ -1,8 +1,8 @@
-package aufgaben.elements;
+package aufgaben.temperature;
 
 import java.util.Objects;
 
-final class Temperature implements Comparable<Temperature> {
+public final class Temperature implements Comparable<Temperature> {
     public static final double KELVIN_OFFSET = 273.15;
     private final double celsius;
 

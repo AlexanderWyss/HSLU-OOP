@@ -1,4 +1,6 @@
-package aufgaben.elements;
+package aufgaben.temperature.history;
+
+import aufgaben.temperature.Temperature;
 
 import java.io.*;
 import java.nio.file.Path;

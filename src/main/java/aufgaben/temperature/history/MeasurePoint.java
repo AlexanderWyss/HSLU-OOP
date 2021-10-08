@@ -1,4 +1,6 @@
-package aufgaben.elements;
+package aufgaben.temperature.history;
+
+import aufgaben.temperature.Temperature;
 
 import java.time.LocalDateTime;
 import java.util.Objects;

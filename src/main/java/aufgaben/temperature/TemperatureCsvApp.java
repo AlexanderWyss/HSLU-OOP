@@ -1,4 +1,8 @@
-package aufgaben.elements;
+package aufgaben.temperature;
+
+import aufgaben.temperature.history.MeasurePoint;
+import aufgaben.temperature.history.TemperatureHistory;
+import aufgaben.temperature.history.TemperatureHistoryCsvReader;
 
 import java.io.File;
 import java.io.IOException;

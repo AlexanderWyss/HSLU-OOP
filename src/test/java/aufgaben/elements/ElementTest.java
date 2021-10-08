@@ -4,8 +4,8 @@ import nl.jqno.equalsverifier.EqualsVerifier;
 import nl.jqno.equalsverifier.Warning;
 import org.junit.jupiter.api.Test;
 
-import static aufgaben.elements.Temperature.celsius;
-import static aufgaben.elements.Temperature.kelvin;
+import static aufgaben.temperature.Temperature.celsius;
+import static aufgaben.temperature.Temperature.kelvin;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class ElementTest {
