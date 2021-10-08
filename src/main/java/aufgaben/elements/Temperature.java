@@ -26,15 +26,7 @@ final class Temperature implements Comparable<Temperature> {
     }
 
     public double getKelvin() {
-        return toKelvin(this.celsius);
-    }
-
-    private static double toKelvin(final double celsius) {
-        return celsius + KELVIN_OFFSET;
-    }
-
-    private static double fromKelvin(final double kelvin) {
-        return kelvin - KELVIN_OFFSET;
+        return this.celsius + KELVIN_OFFSET;
     }
 
     public Temperature addKelvin(final double kelvin) {
@@ -42,19 +34,11 @@ final class Temperature implements Comparable<Temperature> {
     }
 
     public static Temperature kelvin(final double kelvin) {
-        return new Temperature(fromKelvin(kelvin));
+        return new Temperature(kelvin - KELVIN_OFFSET);
     }
 
     public double getFahrenheit() {
-        return toFahrenheit(this.celsius);
-    }
-
-    private static double toFahrenheit(final double celsius) {
-        return (celsius * (9. / 5.)) + 32;
-    }
-
-    private static double fromFahrenheit(final double fahrenheit) {
-        return (fahrenheit - 32) * (5. / 9.);
+        return (this.celsius * (9. / 5.)) + 32;
     }
 
     public Temperature addFahrenheit(final double fahrenheit) {
@@ -62,7 +46,7 @@ final class Temperature implements Comparable<Temperature> {
     }
 
     public static Temperature fahrenheit(final double fahrenheit) {
-        return new Temperature(fromFahrenheit(fahrenheit));
+        return new Temperature((fahrenheit - 32) * (5. / 9.));
     }
 
     public static Temperature of(final double value, final TemperatureUnit unit) {
@@ -105,7 +89,7 @@ final class Temperature implements Comparable<Temperature> {
     }
 
     @Override
-    public final boolean equals(Object o) {
+    public boolean equals(Object o) {
         if (this == o) {
             return true;
         }
@@ -117,7 +101,7 @@ final class Temperature implements Comparable<Temperature> {
     }
 
     @Override
-    public final int hashCode() {
+    public int hashCode() {
         return Objects.hash(celsius);
     }
 
