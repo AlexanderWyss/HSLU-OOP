@@ -4,7 +4,7 @@ import java.util.Objects;
 
 import static java.lang.Math.*;
 
-final class Point {
+public final class Point {
     private int x;
     private int y;
 
@@ -17,7 +17,7 @@ final class Point {
         this(point.getX(), point.getY());
     }
 
-    public final void move(final int x, final int y) {
+    public void move(final int x, final int y) {
         this.x = x;
         this.y = y;
     }
@@ -66,7 +66,7 @@ final class Point {
     }
 
     @Override
-    public final boolean equals(final Object o) {
+    public boolean equals(final Object o) {
         if (this == o) {
             return true;
         }
@@ -78,7 +78,7 @@ final class Point {
     }
 
     @Override
-    public final int hashCode() {
+    public int hashCode() {
         return Objects.hash(x, y);
     }
 }

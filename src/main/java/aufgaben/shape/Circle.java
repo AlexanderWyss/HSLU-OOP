@@ -1,10 +1,14 @@
 package aufgaben.shape;
 
-public final class Circle extends Shape{
+public class Circle extends Shape{
     private int diameter;
 
     public Circle(final int x, final int y, final int diameter) {
-        super(x, y);
+        this(new Point(x, y), diameter);
+    }
+
+    public Circle(Point position, int diameter) {
+        super(position);
         this.diameter = diameter;
     }
 
