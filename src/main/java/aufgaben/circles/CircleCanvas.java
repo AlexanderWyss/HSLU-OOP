@@ -6,6 +6,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
@@ -14,12 +15,13 @@ import java.util.concurrent.ThreadLocalRandom;
 
 import static aufgaben.circles.ColoredFallingCircle.ColoredFallingCircleBuilder;
 
-public class CircleCanvas extends JPanel implements MouseListener, Runnable {
+public class CircleCanvas extends JPanel implements MouseListener, MouseMotionListener, Runnable {
     private final List<ColoredFallingCircle> circles = Collections.synchronizedList(new ArrayList<>());
     private final Color[] colors = new Color[]{Color.RED, Color.BLACK, Color.BLUE, Color.yellow, Color.GREEN, Color.MAGENTA};
 
     public CircleCanvas() {
         addMouseListener(this);
+        addMouseMotionListener(this);
     }
 
     @Override
@@ -54,6 +56,15 @@ public class CircleCanvas extends JPanel implements MouseListener, Runnable {
 
     @Override
     public void mouseClicked(MouseEvent e) {
+        createCircle(e);
+    }
+
+    @Override
+    public void mouseDragged(MouseEvent e) {
+        createCircle(e);
+    }
+
+    private void createCircle(MouseEvent e) {
         ColoredFallingCircle fallingCircleTask = new ColoredFallingCircleBuilder() //
                 .setPosition(new Point(e.getX(), e.getY())) //
                 .setDiameter(randomInt(20, 51)) //
@@ -89,6 +100,11 @@ public class CircleCanvas extends JPanel implements MouseListener, Runnable {
 
     @Override
     public void mouseExited(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseMoved(MouseEvent e) {
 
     }
 }
